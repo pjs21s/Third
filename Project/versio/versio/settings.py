@@ -125,3 +125,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 APPEND_SLASH = False
+LOGIN_REDIRECT_URL ='index'
+LOGOUT_REDIRECT_URL = 'index'

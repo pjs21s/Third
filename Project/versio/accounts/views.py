@@ -7,7 +7,7 @@ from django.shortcuts import render
 # Create your views here.
 
 
-class register(CreateView):
+class Register(CreateView):
     form_class = forms.UserCreateForm
     success_url = reverse_lazy("accounts:login")
     template_name = "accounts/register.html"

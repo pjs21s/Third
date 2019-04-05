@@ -1,4 +1,29 @@
 {% extends "base.html"%}
 {% block body_block %}
     <h1>Profile Page</h1>
+    <div class="row">
+        <div class="col-3">
+          <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="written-columns-tab" data-toggle="pill" href="#written-columns" role="tab" aria-controls="written-columns" aria-selected="true">작성한 글</a>
+            <a class="nav-link" id="written-comments-tab" data-toggle="pill" href="#written-comments" role="tab" aria-controls="written-comments" aria-selected="false">작성한 댓글</a>
+            <a class="nav-link" id="bookmarks-tab" data-toggle="pill" href="#bookmarks" role="tab" aria-controls="bookmarks" aria-selected="false">북마크</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="settings-tab" data-toggle="dropdown" href="#settings" role="button"
+              aria-controls="settings" aria-selected="false" aria-haspopup="true" aria-expanded="false">회원정보</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">수정</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">탈퇴</a>
+            </div>
+          </li>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="tab-content" id="tabContent">
+            <div class="tab-pane fade show active" id="written-columns" role="tabpanel" aria-labelledby="written-columns-tab">작성한 글 목록</div>
+            <div class="tab-pane fade" id="written-comments" role="tabpanel" aria-labelledby="written-comments-tab">작성한 댓글 목록</div>
+            <div class="tab-pane fade" id="bookmarks" role="tabpanel" aria-labelledby="bookmarks-tab">북마크한 글 목록</div>
+          </div>
+        </div>
+      </div>
 {% endblock %}
