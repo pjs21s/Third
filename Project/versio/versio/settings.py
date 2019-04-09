@@ -26,7 +26,7 @@ SECRET_KEY = 'h7x*=&p7*mn$s64-ezt_$#!95%n2d7u30i6)9-s+r_nc&9)3ex'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pjs21s.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost','pjs21s.pythonanywhere.com']
 
 
 # Application definition
