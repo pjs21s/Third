@@ -17,10 +17,13 @@ def free_speech(request):
 def translation(request):
     return render(request, 'posts/translation.html')
 
-class PostList( generic.ListView):
+class PostList(generic.ListView):
     model = models.Post
     
-
+class MainPostList(generic.ListView):
+    model = models.Post
+    template_name ="posts/main_post_list.html"
+    
 class CreatePost(LoginRequiredMixin, generic.CreateView):
     fields = ('title', 'text')
     model = models.Post

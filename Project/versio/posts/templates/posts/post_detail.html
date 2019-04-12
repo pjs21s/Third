@@ -3,5 +3,14 @@
 {% block post_content %}
 <!-- <div class="col-md-8"> -->
     {% include "posts/_post.html" %}
+    <p>{{post.text}}</p>
+    <div class="media-footer">
+            {% if user.is_authenticated and post.user == user and not hide_delete %}
+                <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">
+                    <span class="fa fa-remove text-danger" aria-hidden="true"></span>
+                    <span class="text-danger icon-label">Delete</span>
+                </a>
+            {% endif %}
+        </div>
 <!-- </div> -->
 {% endblock %}

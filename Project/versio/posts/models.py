@@ -9,12 +9,10 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     text = models.TextField()
-  
     title = models.TextField()
 
     def __str__(self):
         return self.text
-
 
     def get_absolute_url(self):
         return reverse(
