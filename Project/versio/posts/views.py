@@ -52,7 +52,6 @@ class UserPosts(generic.ListView):
 
 class PostDetail(generic.DetailView):
     model = models.Post
-   
 
     def get_queryset(self):
         queryset = super().get_queryset()

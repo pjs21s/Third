@@ -2,13 +2,13 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
-    text = models.TextField()
+    text = RichTextField()
     title = models.TextField()
 
     def __str__(self):
@@ -25,4 +25,4 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
-        unique_together = ["user"]
+        unique_together = ["title"]

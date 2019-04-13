@@ -7,7 +7,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/UA_Flight_175_hits_WTC_south_tower_9-11_edit.jpeg/1024px-UA_Flight_175_hits_WTC_south_tower_9-11_edit.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title}}</a></h5>
-                <p class="card-text">{{post.text}}</p>
+                <p class="card-text text-truncate">{{post.text|safe}}</p>
                 <cite title="Source Title"><a href="{% url 'posts:for_user' username=post.user.username %}"><small>by {{post.user.username}}</small></a></cite>
                 <button type="button" class="btn btn-info btn-sm">원문 국가 표시</button>
             </div>

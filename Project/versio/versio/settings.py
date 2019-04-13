@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'accounts',
     'posts',
     'bootstrap4',
+    'ckeditor',
+    'ckeditor_uploader',
     
     
 ]
@@ -127,3 +129,12 @@ STATIC_URL = '/static/'
 APPEND_SLASH = False
 LOGIN_REDIRECT_URL ='index'
 LOGOUT_REDIRECT_URL = 'index'
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        
+        },
+}
