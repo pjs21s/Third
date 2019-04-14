@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 
 {% block post_content %}
-<h4>새로운 포스트</h4>
+<h4>새로운 포스트</h4> <!-- 글 작성 Form-->
 {{ form.media }}
 <form method="POST" action="{% url 'posts:create' %}" id="postForm">
     {% csrf_token %}
