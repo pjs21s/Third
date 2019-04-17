@@ -2,9 +2,16 @@
 {% load bootstrap4 %}
 
 {% block post_content %}
-<h4>새로운 포스트</h4> <!-- 글 작성 Form-->
+<h1>
+    {% if not form.instance.pk %}
+    새로운 포스트
+    {% else %}
+    포스트 수정
+    {% endif %}
+  </h1>
+<!-- 글 작성 Form-->
 {{ form.media }}
-<form method="POST" action="{% url 'posts:create' %}" id="postForm">
+<form method="POST"  id="postForm">
     {% csrf_token %}
     {{form.as_p|safe}}
     {% buttons %}

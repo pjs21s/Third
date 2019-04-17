@@ -8,7 +8,8 @@ urlpatterns = [
     path("delete/<int:pk>/", views.DeletePost.as_view(), name="delete"),
     path("by/<username>/",views.UserPosts.as_view(),name="for_user"),
     path("by/<username>/<int:pk>/",views.PostDetail.as_view(),name="single"),
-    
+    path("update/<int:pk>",views.UpdatePost.as_view(),name="update"),
+
     path('free_speech', views.free_speech, name='free_speech'),
     path('translation', views.translation, name='translation')
 ]

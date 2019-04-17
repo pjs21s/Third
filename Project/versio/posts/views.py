@@ -9,7 +9,6 @@ from .import forms, models
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-
 # Create your views here.
 def free_speech(request):
     return render(request, 'posts/free_speech.html')
@@ -58,3 +57,10 @@ class PostDetail(generic.DetailView):
         return queryset.filter(
             user__username__iexact=self.kwargs.get("username")
         )
+
+class UpdatePost(generic.UpdateView):
+    model = models.Post
+    fields =['title','text']
+    success_url = reverse_lazy('posts:all')
+
+ 
