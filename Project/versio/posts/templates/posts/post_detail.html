@@ -4,7 +4,7 @@
     <div class="container">  <!--타이틀 -->
         <h1 class="display-3">{{post.title|safe}}</h1>
         <div class="media-footer d-flex flex-row-reverse">
-            <i class="far fa-eye"> {{hitcount.pk}}</i>
+            <i class="far fa-eye"> {{ hitcount.total_hits }}</i>
             {% if user.is_authenticated and post.user == user and not hide_delete %}
             <small class="text-muted align-middle">{{ post.created_at }}</small>
                 <a href="{% url 'posts:delete' pk=post.pk %}" title="delete">
