@@ -4,6 +4,7 @@ from django.contrib import messages
 from braces.views import SelectRelatedMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from hitcount.views import HitCountDetailView
 
 from .import forms, models
 from django.contrib.auth import get_user_model
@@ -49,8 +50,9 @@ class UserPosts(generic.ListView):
     model = models.Post
     template_name = "posts/user_post_list.html"
 
-class PostDetail(generic.DetailView):
+class PostDetail(HitCountDetailView):
     model = models.Post
+    count_hit = True
 
     def get_queryset(self):
         queryset = super().get_queryset()

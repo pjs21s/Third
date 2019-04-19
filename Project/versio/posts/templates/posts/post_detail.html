@@ -6,6 +6,7 @@
         <div class="media-footer d-flex flex-row-reverse">
             {% if user.is_authenticated and post.user == user and not hide_delete %}
             <small class="text-muted align-middle">{{ post.created_at }}</small>
+            <p>조회수</p>{{hitcount.pk}}
                 <a href="{% url 'posts:delete' pk=post.pk %}" title="delete">
                     <button type="button" class="btn btn-outline-danger">삭제</button>
                 </a>
