@@ -25,7 +25,7 @@ class MainPostList(generic.ListView):
     template_name ="posts/main_post_list.html"
     
 class CreatePost(LoginRequiredMixin, generic.CreateView):
-    fields = ('title', 'text')
+    fields = ('title','link', 'text', )
     model = Post
 
     def form_valid(self, form):
@@ -49,6 +49,17 @@ class DeletePost(LoginRequiredMixin, generic.DeleteView):
 class UserPosts(generic.ListView):
     model = Post
     template_name = "posts/user_post_list.html"
+
+    def get_queryset(self):
+        try:
+            self.post_user = User.objects.prefetch_related("posts").get(
+                username__iexact=self.kwargs.get("username")
+            )
+        except User.DoesNotExist:
+            raise Http404
+        else:
+            return self.post_user.posts.all()
+
 
 class PostDetail(HitCountDetailView):
     model = Post

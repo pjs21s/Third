@@ -1,5 +1,5 @@
 {% extends "posts/post_base.html" %}
-
+{% load social_share %}
 {% block post_content %}
     <div class="container">  <!--타이틀 -->
         <h1 class="display-3">{{post.title|safe}}</h1>
@@ -17,7 +17,14 @@
         </div>
     </div>
     <div class="jumbotron"> <!-- 본문 -->
-        {{post.text|safe}}
+        {{post.text|safe}} 
+        <div class="btn-group" style="margin-bottom:-5em"> <!-- (좋아요, 공유 버튼 등) -->
+            <button type="button" class="btn btn-light"><i class="far fa-heart"></i></button>
+            <button type="button" class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
+            <button type="button" class="btn btn-light">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
+            <button type="button" class="btn btn-light"><i class="fas fa-bug"></i></button>
+            <button type="button" class="btn btn-light"><i class="fas fa-bookmark"></i></button>
+        </div>
     </div>
     <h3 class="display-5">댓글</h3>
     {% if user.is_authenticated %}
@@ -28,11 +35,10 @@
     </form>
     {% endif %}
     {% for comment in post.comments.all %}
-    
     <div class="container">
         <div class="card shadow-sm p-3 mb-5 bg-white rounded">
             <div class="card-body">
-                    작성자 <p>{{comment.comment_writer}}</p>
+                    작성자 <p>{{comment.comment_writer.user.username}}</p>
                     <p class="font-weight-light">{{comment.comment_date}}</p>
                     <p class="text-monospace">{{comment.comment_text}}</p>
             </div>
@@ -43,11 +49,4 @@
         <p>No Comment</p>
     {% endfor %}
 {% endblock %}
-{% block post_side %}
-    <div class="btn-group-vertical" style="margin-left:-3.6em"> <!-- 네거티브 마진(좋아요, 공유 버튼 등) -->
-        <button type="button" class="btn btn-secondary"><i class="far fa-heart"></i></button>
-        <button type="button" class="btn btn-secondary"><i class="fas fa-share"></i></button>
-        <button type="button" class="btn btn-secondary"><i class="fas fa-bug"></i></button>
-        <button type="button" class="btn btn-secondary"><i class="fas fa-bookmark"></i></button>
-    </div>
-{% endblock %}
+

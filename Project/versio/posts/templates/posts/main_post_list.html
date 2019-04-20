@@ -9,7 +9,7 @@
                 <h5 class="card-title"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title}}</a></h5>
                 {{post.text|safe}}
                 <cite title="Source Title"><a href="{% url 'posts:for_user' username=post.user.username %}"><small>by {{post.user.username}}</small></a></cite>
-                <button type="button" class="btn btn-info btn-sm">원문 국가 표시</button>
+                <button type="button" class="btn btn-info btn-sm">원문 {{post.link|urlizetrunc:15}}</button>
             </div>
         </div>
         {% endfor %}

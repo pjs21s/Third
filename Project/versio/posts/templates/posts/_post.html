@@ -1,11 +1,11 @@
-<div class="table-responsive"> <!-- 게시물 테이블 -->
+<div class="table-responsive col-lg"> <!-- 게시물 테이블 -->
     <table class="table">
     <tbody>
         <tr scope="row">
           <td>{{post.id}}</td>
-          <td><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title}}</a>( {{post.comments.count}} )</td>
-          <td><a href="{% url 'posts:for_user' username=post.user.username %}">{{post.user.username}}</a></td>
-          <td><time class="time">{{ post.created_at }}</time></td>  
+          <td ><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title}}</a>( {{post.comments.count}} )</td>
+          <td ><a href="{% url 'posts:for_user' username=post.user.username %}">{{post.user.username}}</a></td>
+          <td>{{ post.created_at }}</td>  
         </tr>
     </tbody>
     </table>
