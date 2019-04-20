@@ -9,6 +9,7 @@ from .forms import CommentForm
 from .models import Post
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from django.core.paginator import Paginator
 
 # Create your views here.
 def free_speech(request):
@@ -19,6 +20,8 @@ def translation(request):
 
 class PostList(generic.ListView):
     model = Post
+    paginate_by = 10
+    queryset = Post.objects.all()
     
 class MainPostList(generic.ListView):
     model = Post
@@ -90,4 +93,3 @@ def comment_write(request, pk):
     else:
         form = CommentForm()
     return render(request, 'posts/comment_form.html', {'form':form})
-
