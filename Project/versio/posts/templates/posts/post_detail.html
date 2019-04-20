@@ -19,7 +19,29 @@
     <div class="jumbotron"> <!-- 본문 -->
         {{post.text|safe}}
     </div>
-    <h3 class="display-5">댓글!</h3>
+    <h3 class="display-5">댓글</h3>
+    {% if user.is_authenticated %}
+    <form action="{% url 'posts:comment_write' pk=post.pk %}" method="POST">
+        {% csrf_token %}
+        <textarea type="text" name="comment_text" rows="3"></textarea>
+        <input type="submit" class="btn btn-outline-primary" value="write">
+    </form>
+    {% endif %}
+    {% for comment in post.comments.all %}
+    
+    <div class="container">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                    작성자 <p>{{comment.comment_writer}}</p>
+                    <p class="font-weight-light">{{comment.comment_date}}</p>
+                    <p class="text-monospace">{{comment.comment_text}}</p>
+            </div>
+        </div>
+    </div>
+   
+    {% empty %}
+        <p>No Comment</p>
+    {% endfor %}
 {% endblock %}
 {% block post_side %}
     <div class="btn-group-vertical" style="margin-left:-3.6em"> <!-- 네거티브 마진(좋아요, 공유 버튼 등) -->

@@ -1,12 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from braces.views import SelectRelatedMixin
 from django.views import generic
 from django.urls import reverse_lazy
 from hitcount.views import HitCountDetailView
-
-from .import forms, models
+from django.contrib.auth.decorators import login_required
+from .forms import CommentForm
+from .models import Post
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -18,15 +18,15 @@ def translation(request):
     return render(request, 'posts/translation.html')
 
 class PostList(generic.ListView):
-    model = models.Post
+    model = Post
     
 class MainPostList(generic.ListView):
-    model = models.Post
+    model = Post
     template_name ="posts/main_post_list.html"
     
 class CreatePost(LoginRequiredMixin, generic.CreateView):
     fields = ('title', 'text')
-    model = models.Post
+    model = Post
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -35,7 +35,7 @@ class CreatePost(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 class DeletePost(LoginRequiredMixin, generic.DeleteView):
-    model = models.Post
+    model = Post
     success_url = reverse_lazy("posts:all")
 
     def get_queryset(self):
@@ -47,11 +47,11 @@ class DeletePost(LoginRequiredMixin, generic.DeleteView):
         return super().delete(*args, **kwargs)
     
 class UserPosts(generic.ListView):
-    model = models.Post
+    model = Post
     template_name = "posts/user_post_list.html"
 
 class PostDetail(HitCountDetailView):
-    model = models.Post
+    model = Post
     count_hit = True
 
     def get_queryset(self):
@@ -61,8 +61,21 @@ class PostDetail(HitCountDetailView):
         )
 
 class UpdatePost(generic.UpdateView):
-    model = models.Post
+    model = Post
     fields =['title','text']
     success_url = reverse_lazy('posts:all')
 
- 
+@login_required
+def comment_write(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('posts:all')
+    else:
+        form = CommentForm()
+    return render(request, 'posts/comment_form.html', {'form':form})
+
