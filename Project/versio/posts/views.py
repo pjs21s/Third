@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from hitcount.views import HitCountDetailView
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm
-from .models import Post
+from .models import Post, Comment
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.core.paginator import Paginator
@@ -93,3 +93,10 @@ def comment_write(request, pk):
     else:
         form = CommentForm()
     return render(request, 'posts/comment_form.html', {'form':form})
+
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post_pk = comment.post.pk
+    comment.delete()
+    return redirect('posts:all')

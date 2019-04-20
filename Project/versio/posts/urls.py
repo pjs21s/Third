@@ -10,7 +10,7 @@ urlpatterns = [
     path("by/<username>/<int:pk>/",views.PostDetail.as_view(),name="single"),
     path("update/<int:pk>",views.UpdatePost.as_view(),name="update"),
     path('<int:pk>/comment/', views.comment_write, name='comment_write'),
-
+    path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
 
     path('free_speech', views.free_speech, name='free_speech'),
     path('translation', views.translation, name='translation')

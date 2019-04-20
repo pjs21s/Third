@@ -5,8 +5,8 @@
         <h1 class="display-3">{{post.title|safe}}</h1>
         <div class="media-footer d-flex flex-row-reverse">
             <i class="far fa-eye"> {{ hitcount.total_hits }}</i>
-            {% if user.is_authenticated and post.user == user and not hide_delete %}
             <small class="text-muted align-middle">{{ post.created_at }}</small>
+            {% if user.is_authenticated and post.user == user and not hide_delete %}
                 <a href="{% url 'posts:delete' pk=post.pk %}" title="delete">
                     <button type="button" class="btn btn-outline-danger">삭제</button>
                 </a>
@@ -41,6 +41,9 @@
                     작성자 {{comment.comment_writer}}
                     <p class="font-weight-light">{{comment.comment_date}}</p>
                     <p class="text-monospace">{{comment.comment_text}}</p>
+                    {% if user.is_authenticated and comment.comment_writer == user %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'posts:comment_remove' pk=comment.pk %}"><i class="fas fa-trash-alt"></i></a>
+                    {% endif %}
             </div>
         </div>
     </div>
