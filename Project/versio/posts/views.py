@@ -83,6 +83,7 @@ def comment_write(request, pk):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
+            comment.comment_writer = request.user
             comment.post = post
             comment.save()
             return redirect('posts:all')
