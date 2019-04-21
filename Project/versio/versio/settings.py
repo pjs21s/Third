@@ -15,8 +15,14 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+WHOOSH_INDEX = os.path.join(BASE_DIR, 'whoosh_index')
 
-
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': WHOOSH_INDEX,
+    },
+}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -45,6 +51,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'hitcount',
     'django_social_share',
+    'haystack',
     
     
 ]
@@ -145,6 +152,5 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList', '-','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink', 'Image']
         ]
-        
         },
 }

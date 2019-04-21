@@ -17,7 +17,7 @@
 	{% for post in post_list %}
         {% include "posts/_post.html" %}
 	{% endfor %}
-
+<!-- 페이지네이션 코드 -->
 	{% if is_paginated %}
   	<ul class="pagination pg-blue justify-content-center">
     {% if page_obj.has_previous %}
@@ -39,7 +39,5 @@
     {% endif %}
   	</ul>
 	{% endif %}
-
-
 </div>
 {% endblock %}

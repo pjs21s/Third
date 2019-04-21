@@ -1,13 +1,11 @@
 {% extends "posts/post_base.html" %}
-
 {% block prepost %}
-<div class="col-md-4"> <!-- 특정 유저가 작성했던 글 Layout -->
+<!-- 특정 유저가 작성했던 글 Layout -->
 	<h3>작성했던 글</h3>
-</div>
 {% endblock %}
 
 {% block post_content %}
-<div class="col-md-8">
+<div class="col-lg">
 	{% for post in post_list %}
 		{% include "posts/_post.html" %}
 	{% endfor %}

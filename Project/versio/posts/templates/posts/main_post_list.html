@@ -5,10 +5,12 @@
         {% for post in post_list %}
         <div class="card shadow-sm p-3 mb-5 bg-white rounded">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/UA_Flight_175_hits_WTC_south_tower_9-11_edit.jpeg/1024px-UA_Flight_175_hits_WTC_south_tower_9-11_edit.jpeg" class="card-img-top" alt="...">
+            <!--테스트 이미지 링크 -->
             <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title}}</a></h5>
                 {{post.text|safe|truncatechars:30}}
-                <cite title="Source Title"><a href="{% url 'posts:for_user' username=post.user.username %}"><small>by {{post.user.username}}</small></a></cite>
+                <cite title="Source Title"><a href="{% url 'posts:for_user' username=post.user.username %}">
+                    <small>by {{post.user.username}}</small></a></cite>
                 <button type="button" class="btn btn-outline-dark btn-sm">{{post.link|urlizetrunc:0}}</button>
             </div>
         </div>

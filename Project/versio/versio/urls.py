@@ -25,4 +25,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('posts/', include('posts.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('search/', include('haystack.urls')),
 ]
