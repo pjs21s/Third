@@ -2,36 +2,38 @@
 {% load social_share %}
 {% block post_content %}
     <div class="container">  <!--타이틀 -->
-        <h2 class="display-3">{{post.title|safe}}</h2>
+        <h3 class="display-4">{{post.title|safe}}</h3>
         <div class="media-footer d-flex flex-row-reverse">
             <i class="far fa-eye"> {{ hitcount.total_hits }}</i>
             <small class="text-muted align-middle">{{ post.created_at }}</small>
             {% if user.is_authenticated and post.user == user and not hide_delete %}
                 <a href="{% url 'posts:delete' pk=post.pk %}" title="delete">
-                    <button type="button" class="btn btn-outline-danger">삭제</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm">삭제</button>
                 </a>
                 <a href="{% url 'posts:update' pk=post.pk%}" title="update">
-                    <button type="button" class="btn btn-outline-warning">수정</button>
+                    <button type="button" class="btn btn-outline-warning btn-sm">수정</button>
                 </a>
             {% endif %}
         </div>
     </div>
     <div class="jumbotron"> <!-- 본문 -->
         {{post.text|safe}} 
-        <div class="btn-group" style="margin-bottom:-4em"> <!-- (좋아요, 공유 버튼 등) -->
-            <button type="button" class="btn btn-light"><i class="far fa-heart"></i></button>
-            <button type="button" class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
-            <button type="button" class="btn btn-light">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
-            <button type="button" class="btn btn-light"><i class="fas fa-bug"></i></button>
-            <button type="button" class="btn btn-light"><i class="fas fa-bookmark"></i></button>
+        <div class="btn-group btn-group-sm" style="margin-bottom:-4em"> <!-- (좋아요, 공유 버튼 등) -->
+            <button type="button" class="btn btn-danger"><i class="far fa-heart"></i></button>
+            <button type="button" class="btn btn-danger">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
+            <button type="button" class="btn btn-danger">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
+            <button type="button" class="btn btn-danger"><i class="fas fa-bug"></i></button>
+            <button type="button" class="btn btn-danger"><i class="fas fa-bookmark"></i></button>
         </div>
     </div>
-    <h3 class="display-5">댓글</h3>
+    <h3 class="display-5">댓글( {{post.comments.count}} )</h3>
     {% if user.is_authenticated %}
     <form action="{% url 'posts:comment_write' pk=post.pk %}" method="POST">
         {% csrf_token %}
-        <textarea type="text" name="comment_text" rows="3"></textarea>
-        <input type="submit" class="btn btn-outline-primary" value="댓글 작성">
+        <div class="md-form">
+        <textarea class="md-textarea form-control" name="comment_text" rows="2"></textarea>
+        <input type="submit" class="btn btn-outline-primary" value="작성">
+        </div>
     </form>
     {% endif %}
     {% for comment in post.comments.all %}
@@ -45,11 +47,11 @@
                     <a class="btn btn-primary btn-sm" href="{% url 'posts:comment_remove' pk=comment.pk %}"><i class="fas fa-trash-alt"></i></a>
                     {% endif %}
             </div>
-        </div>
+        </div> 
     </div>
    
     {% empty %}
-        <p>댓글이 없습니다 :)</p>
+        <div class="bg-light" style="width:17rem";>글이 좋으셨다면 댓글을 남겨주세요 :)</div>
     {% endfor %}
 {% endblock %}
 

@@ -10,7 +10,5 @@ class Register(generic.CreateView):
     success_url = reverse_lazy("accounts:login")
     template_name = "accounts/register.html"
 
-
-
 def profile(request):
     return render(request, 'accounts/profile.html')

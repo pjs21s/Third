@@ -28,7 +28,7 @@ class MainPostList(generic.ListView):
     template_name ="posts/main_post_list.html"
     
 class CreatePost(LoginRequiredMixin, generic.CreateView):
-    fields = ('title','link', 'text', )
+    fields = ('title','link', 'text',)
     model = Post
 
     def form_valid(self, form):
