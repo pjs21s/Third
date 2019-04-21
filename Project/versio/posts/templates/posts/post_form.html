@@ -13,7 +13,8 @@
 {{ form.media }}
 <form method="POST" id="postForm">
     {% csrf_token %}
-    {{form.as_p|safe}}
+    {% bootstrap_form form %}
+    <!-- {{form.as_p|safe}} -->
     {% buttons %}
         <button type="submit" class="btn btn-primary">포스팅</button>
     {% endbuttons %}
