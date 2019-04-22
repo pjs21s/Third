@@ -28,6 +28,4 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('search/', include('haystack.urls')),
-    path('upload/', login_required(upload), name='ckeditor_upload'),
-    path('browse/', login_required(never_cache(browse)), name='ckeditor_browse'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
