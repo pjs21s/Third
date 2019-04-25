@@ -12,3 +12,18 @@ class Register(generic.CreateView):
 
 def profile(request):
     return render(request, 'accounts/profile.html')
+
+# 회원가입 함수형_미완성
+# def signup(request):
+# ​    if request.method == 'POST':
+# ​        form = SignUpForm(request.POST)
+# ​        if form.is_valid():
+# ​            form.save()
+# ​            username = form.cleaned_data.get('username')
+# ​            password = form.cleaned_data.get('password1')
+# ​            user = authenticate(username = username, password = password)
+# ​            login(request, user)
+# ​            return redirect('index')
+# ​    else:
+# ​        form = SignUpForm()
+# ​    return render(request, 'accounts/register.html', {'form':form})
