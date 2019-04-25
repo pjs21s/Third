@@ -17,6 +17,14 @@ class Profile(generic.DetailView):
     success_url = reverse_lazy("accounts:profile")
     template_name = "accounts/profile.html"
 
+class DeleteUser(generic.DeleteView):
+    model = User
+    success_url = reverse_lazy("accounts:login")
+    template_name = "accounts/user_confirm_delete.html"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(id=self.request.user.pk)
 
 # def profile(request):
 #     return render(request, 'accounts/profile.html')

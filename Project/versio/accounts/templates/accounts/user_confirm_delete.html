@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body_block %}
+<h3>탈퇴하시겠습니까?></h3>
+<form method="POST">
+	{% csrf_token %}
+	<input type="submit" value="탈퇴" class="btn btn-danger btn-large">
+	<a href="{% url 'accounts:profile' pk=object.pk %}" class="btn btn-light btn-large">취소</a>
+</form>
+{% endblock %}
