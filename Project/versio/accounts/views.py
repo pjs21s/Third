@@ -1,4 +1,6 @@
 from . import forms
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from django.contrib.auth import login, logout
 from django.views import generic
 from django.urls import reverse_lazy
@@ -10,8 +12,14 @@ class Register(generic.CreateView):
     success_url = reverse_lazy("accounts:login")
     template_name = "accounts/register.html"
 
-def profile(request):
-    return render(request, 'accounts/profile.html')
+class Profile(generic.DetailView):
+    model = User
+    success_url = reverse_lazy("accounts:profile")
+    template_name = "accounts/profile.html"
+
+
+# def profile(request):
+#     return render(request, 'accounts/profile.html')
 
 # 회원가입 함수형_미완성
 # def signup(request):
