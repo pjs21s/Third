@@ -4,11 +4,10 @@
     <div class="card-columns"> <!-- 메인 페이지 카드 형태 게시물 표시 -->
         {% for post in post_list %}
         <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/UA_Flight_175_hits_WTC_south_tower_9-11_edit.jpeg/1024px-UA_Flight_175_hits_WTC_south_tower_9-11_edit.jpeg" class="card-img-top" alt="...">
-            <!--테스트 이미지 링크 -->
+        
             <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title}}</a></h5>
-                {{post.text|safe|truncatechars:30}}
+                <h5 class="card-title"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title|truncatechars:20}}</a></h5>
+                {{post.text|safe|truncatechars:30}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
                 <cite title="Source Title"><a href="{% url 'posts:for_user' username=post.user.username %}">
                     <small>by {{post.user.username}}</small></a></cite>
                 <button type="button" class="btn btn-outline-dark btn-sm">{{post.link|urlizetrunc:0}}</button>
