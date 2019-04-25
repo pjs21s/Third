@@ -4,7 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 class User(auth.models.User, auth.models.PermissionsMixin):
-
+    
     def __str__(self):
         return "@{}".format(self.username)
 
@@ -15,5 +15,4 @@ class User(auth.models.User, auth.models.PermissionsMixin):
                 "pk": self.pk
             }
         )
-    class Meta:
-        unique_together = ["title"]
+    
