@@ -1,8 +1,13 @@
 {% extends "base.html"%}
 {% load bootstrap4 %}
 {% block body_block %}
+{% if not form.instance.pk %}
+    회원가입
+{% else %}
+    회원수정
+{% endif %}
     <div class="container">
-        <h1>회원가입</h1>
+        <!-- <h1>회원가입</h1> -->
         <form method="POST" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}

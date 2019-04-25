@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout
 from django.views import generic
 from django.urls import reverse_lazy
 from django.shortcuts import render
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 class Register(generic.CreateView):
     form_class = forms.UserCreateForm
@@ -17,7 +17,7 @@ class Profile(generic.DetailView):
     success_url = reverse_lazy("accounts:profile")
     template_name = "accounts/profile.html"
 
-class DeleteUser(generic.DeleteView):
+class DeleteUser(LoginRequiredMixin, generic.DeleteView):
     model = User
     success_url = reverse_lazy("accounts:login")
     template_name = "accounts/user_confirm_delete.html"
@@ -25,6 +25,12 @@ class DeleteUser(generic.DeleteView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(id=self.request.user.pk)
+
+class ModifyUser(generic.UpdateView):
+    model = User
+    fields =['email']
+    success_url = reverse_lazy('accounts:login')
+    template_name = "accounts/register.html"
 
 # def profile(request):
 #     return render(request, 'accounts/profile.html')

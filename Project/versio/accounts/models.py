@@ -15,3 +15,5 @@ class User(auth.models.User, auth.models.PermissionsMixin):
                 "pk": self.pk
             }
         )
+    class Meta:
+        unique_together = ["title"]
