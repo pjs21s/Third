@@ -10,6 +10,12 @@ from .models import Post, Comment
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.core.paginator import Paginator
+from django.views.decorators.http import require_POST
+from django.http import HttpResponse
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
 
 # Create your views here.
 def free_speech(request):
@@ -100,3 +106,4 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('posts:all')
+

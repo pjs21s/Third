@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 {% block body_block %}
-    <h1>{{user.username}}'s Profile Page</h1>
+    <h1>{{user.username}}의 프로필</h1>
     <div class="row">
         <div class="col-3">
           <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
@@ -11,7 +11,9 @@
             <a class="nav-link dropdown-toggle" id="settings-tab" data-toggle="dropdown" href="#settings" role="button"
               aria-controls="settings" aria-selected="false" aria-haspopup="true" aria-expanded="false">회원정보</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{% url 'accounts:modify' pk=user.pk %}">수정</a>
+              <a class="dropdown-item" href="{% url 'accounts:modify' pk=user.pk %}">이메일 수정</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'accounts:change_password' %}">비밀번호 수정</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'accounts:remove' pk=user.pk %}">탈퇴</a>
             </div>

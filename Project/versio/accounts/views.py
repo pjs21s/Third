@@ -4,8 +4,12 @@ User = get_user_model()
 from django.contrib.auth import login, logout
 from django.views import generic
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
 # Create your views here.
 class Register(generic.CreateView):
     form_class = forms.UserCreateForm
@@ -32,20 +36,18 @@ class ModifyUser(generic.UpdateView):
     success_url = reverse_lazy('accounts:login')
     template_name = "accounts/register.html"
 
-# def profile(request):
-#     return render(request, 'accounts/profile.html')
-
-# 회원가입 함수형_미완성
-# def signup(request):
-# ​    if request.method == 'POST':
-# ​        form = SignUpForm(request.POST)
-# ​        if form.is_valid():
-# ​            form.save()
-# ​            username = form.cleaned_data.get('username')
-# ​            password = form.cleaned_data.get('password1')
-# ​            user = authenticate(username = username, password = password)
-# ​            login(request, user)
-# ​            return redirect('index')
-# ​    else:
-# ​        form = SignUpForm()
-# ​    return render(request, 'accounts/register.html', {'form':form})
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, '성공적으로 변경되었습니다.')
+            return redirect('accounts:login')
+        else:
+            messages.error(request, '문제가 있습니다.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
