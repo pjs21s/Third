@@ -107,3 +107,12 @@ def comment_remove(request, pk):
     comment.delete()
     return redirect('posts:all')
 
+@login_required
+def post_like(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post_like, post_like_created = post.like_set.get_or_create(user=request.user)
+
+    if not post_like_created:
+        post_like.delete()
+
+    return redirect('posts:all')
