@@ -3,21 +3,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views import generic
 from django.urls import reverse_lazy
-from hitcount.views import HitCountDetailView
-from django.contrib.auth.decorators import login_required
-from .forms import CommentForm
-from .models import Post, Comment
-from django.contrib.auth import get_user_model
-User = get_user_model()
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+User = get_user_model()
 try:
     from django.utils import simplejson as json
 except ImportError:
     import json
+from hitcount.views import HitCountDetailView
+from .forms import CommentForm
+from .models import Post, Comment
 
-# Create your views here.
 def free_speech(request):
     return render(request, 'posts/free_speech.html')
 
@@ -108,11 +107,18 @@ def comment_remove(request, pk):
     return redirect('posts:all')
 
 @login_required
-def post_like(request, pk):
+@require_POST
+def post_like(request):
+    pk = request.POST.get('pk', None)
     post = get_object_or_404(Post, pk=pk)
     post_like, post_like_created = post.like_set.get_or_create(user=request.user)
 
     if not post_like_created:
         post_like.delete()
+        message = "좋아요 취소"
+    else:
+        message = "좋아요"
 
-    return redirect('posts:all')
+    context = {'like_count': post.like_count, 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
+   

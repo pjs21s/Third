@@ -10,7 +10,7 @@
                 {{post.text|safe|truncatechars:30}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
                 <cite title="Source Title"><a href="{% url 'posts:for_user' username=post.user.username %}">
                     <small>by {{post.user.username}}</small></a></cite>
-                <button type="button" class="btn btn-outline-dark btn-sm">{{post.link|urlizetrunc:0}}</button>
+                <button class="btn btn-outline-dark btn-sm">{{post.link|urlizetrunc:0}}</button>
             </div>
         </div>
         {% endfor %}

@@ -8,24 +8,43 @@
             <small class="text-muted align-middle">{{ post.created_at }}</small>
             {% if user.is_authenticated and post.user == user and not hide_delete %}
                 <a href="{% url 'posts:delete' pk=post.pk %}" title="delete">
-                    <button type="button" class="btn btn-outline-danger btn-sm">삭제</button>
-                </a>
+                    <button class="btn btn-outline-danger btn-sm">삭제</button></a>
                 <a href="{% url 'posts:update' pk=post.pk%}" title="update">
-                    <button type="button" class="btn btn-outline-warning btn-sm">수정</button>
-                </a>
+                    <button class="btn btn-outline-warning btn-sm">수정</button></a>
             {% endif %}
         </div>
     </div>
-    <div class="jumbotron"> <!-- 본문 -->
+    <div class="jumbotron">
         {{post.text|safe}} 
-        <div class="btn-group btn-group-sm" style="margin-bottom:-4em"> <!-- (좋아요, 공유 버튼 등) -->
-            <button type="button" class="btn btn-link btn-outline-info">
-                <a href="{% url 'posts:post_like' pk=post.pk %}"><i class="far fa-heart"></i>
-                </a> {{ post.like_count }}개</button> <!--좋아요 아이콘 -->
-            <button type="button" class="btn btn-link btn-outline-info">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
-            <button type="button" class="btn btn-link btn-outline-info">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
-            <button type="button" class="btn btn-link btn-outline-info"><i class="fas fa-bug"></i></button> <!--신고 아이콘 -->
-            <button type="button" class="btn btn-link btn-outline-info"><i class="fas fa-bookmark"></i></button> <!--북마크 아이콘 -->
+        <div class="btn-group btn-group-sm" style="margin-bottom:-4em">
+            <input type="button" class="like" name="{{post.pk}}" value="Like">
+            <p id="count-{{post.pk}}">{{ post.like_count }}개</p>
+
+            <script type="text/javascript">
+                $(".like").click(function(){
+                    var pk = $(this).attr('name')
+                    $.ajax({
+                        type: "POST",
+                        url: "{% url 'posts:post_like'%}",
+                        data: {'pk': pk, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                        dataType: "json",
+            
+                        success: function(response){
+                            alert(response.message);
+                            $("#count-"+pk).html(response.like_count+"개");
+                        },
+                        error: function(request, status, error){
+                            alert("로그인이 필요합니다.")
+                            window.location.replace("/accounts/login/")
+                        },
+                    })
+                })
+            </script>
+            
+            <button class="btn btn-link btn-outline-info">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
+            <button class="btn btn-link btn-outline-info">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
+            <button class="btn btn-link btn-outline-info"><i class="fas fa-bug"></i></button> <!--신고 아이콘 -->
+            <button class="btn btn-link btn-outline-info"><i class="fas fa-bookmark"></i></button> <!--북마크 아이콘 -->
         </div>
     </div>
     <h3 class="display-5">댓글( {{post.comments.count}} )</h3>
@@ -37,7 +56,6 @@
         <input type="submit" class="btn btn-outline-primary" value="작성">
         </div>
     </form>
-    
     {% endif %}
     {% for comment in post.comments.all %}
     <div class="container">
@@ -53,9 +71,10 @@
             </div>
         </div> 
     </div>
-      
     {% empty %}
         <div class="bg-light" style="width:17rem";>글이 좋으셨다면 댓글을 남겨주세요 :)</div>
     {% endfor %}
+    
 {% endblock %}
+
 

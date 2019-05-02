@@ -11,7 +11,7 @@ urlpatterns = [
     path("update/<int:pk>",views.UpdatePost.as_view(),name="update"),
     path('<int:pk>/comment/', views.comment_write, name='comment_write'),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
-    path('<int:pk>/like/', views.post_like, name='post_like'),
+    path('like/', views.post_like, name='post_like'),
 
 
     path('free_speech', views.free_speech, name='free_speech'),

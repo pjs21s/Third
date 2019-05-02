@@ -5,7 +5,6 @@ User = get_user_model()
 from ckeditor_uploader.fields import RichTextUploadingField
 from hitcount.models import HitCountMixin
 from django.conf import settings
-# Create your models here.
 
 class Post(models.Model, HitCountMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
@@ -34,6 +33,7 @@ class Post(models.Model, HitCountMixin):
         ordering = ["-created_at"]
         unique_together = ["title"]
 
+    @property
     def like_count(self):
         return self.like_user_set.count()
 

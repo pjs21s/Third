@@ -10,6 +10,14 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">  
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/js/mdb.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
     <body>
@@ -22,7 +30,6 @@
                     <div class="navbar-nav">
                         <div class="md-form mt-0">
                         <form action="search/" class="form-inline">
-                            <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
                             <button class="btn btn-outline-white my-2 my-sm-0" type="submit">검색</button>
                         </form>
                         </div>
@@ -39,27 +46,18 @@
                 </div>
         </nav>
         <nav class="navbar navbar-dark danger-color" style="padding: 0px;">
-            <form class="form-inline ">
-                <button class="btn btn-link" type="button"><a href="{% url 'posts:all' %}">
-                    <span class="font-weight-bolder align-middle white-text">전체 게시판</span></a></button>
-                <button class="btn btn-link" type="button"><a href="{% url 'posts:translation' %}">
-                    <span class="font-weight-bolder align-middle white-text">번역 게시판</span></a></button>
-                <button class="btn btn-link" type="button"><a href="{% url 'posts:free_speech' %}">
-                    <span class="font-weight-bolder align-middle white-text">자유 게시판</span></a></button>
+            <form class="form-inline">
+                <a href="{% url 'posts:all' %}"><button class="btn btn-link" type="button">
+                    <span class="font-weight-bolder align-middle white-text">전체 게시판</span></button></a>
+                <a href="{% url 'posts:translation' %}"><button class="btn btn-link" type="button">
+                    <span class="font-weight-bolder align-middle white-text">번역 게시판</span></button></a>
+                <a href="{% url 'posts:free_speech' %}"><button class="btn btn-link" type="button">
+                    <span class="font-weight-bolder align-middle white-text">자유 게시판</span></button></a>
             </form>
         </nav>
         <div class="container" style="padding:15px;">
             {% block body_block %}
-            
             {% endblock %}
         </div>
-        <!-- JQuery -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/js/mdb.min.js"></script>
     </body>
 </html>
