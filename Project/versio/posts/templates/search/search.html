@@ -1,11 +1,10 @@
 {% extends "posts/post_base.html" %}
 {% load bootstrap4 %}
 {% block post_content %}
-<h2>검색</h2>
+<h2 class="font-weight-bold">검색</h2>
     <form method="get" action=".">
         <table>
             {% bootstrap_form form %} 
-            <!-- {{ form.as_table }} -->
             <tr>
                 <td>&nbsp;</td>
                 <td>
@@ -16,7 +15,7 @@
         {% if query %}
             <h3>결과</h3>
             {% for result in page.object_list %}
-                <a href="{{ result.object.get_absolute_url}}"><p>{{ result.object.title }}</p></a>
+            <ul><li><a href="{{ result.object.get_absolute_url}}"><p>{{ result.object.title }}</p></a></li></ul>
             {% empty %}
                 <p>찾으시는 결과가 없습니다.</p>
             {% endfor %}

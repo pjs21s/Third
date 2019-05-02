@@ -3,8 +3,7 @@
     <h1>새로운 댓글</h1>
     <form method="POST" class="post-form">
     {% csrf_token %}
-    {{form.as_p}}
+    {% bootstrap_form form %} 
     <button type="submit" class="save btn btn-default">댓글 작성</button>
     </form>
-
 {% endblock %}

@@ -1,19 +1,15 @@
 {% extends "posts/post_base.html" %}
 {% load bootstrap4 %}
 {% block post_content %}
-<h1>
 {% if not form.instance.pk %}
-    새로운 포스트
+<h2 class="font-weight-bold">새로운 포스트</h2>
 {% else %}
-    포스트 수정
+<h2 class="font-weight-bold">포스트 수정</h2>
 {% endif %}
-</h1>
-<!-- 글 작성 Form-->
 {{ form.media }}
 <form method="POST" id="postForm">
     {% csrf_token %}
     {% bootstrap_form form %} 
-    
     {% buttons %}
         <button type="submit" class="btn btn-primary">포스팅</button>
     {% endbuttons %}

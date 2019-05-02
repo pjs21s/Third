@@ -4,6 +4,7 @@
 {% block post_content %}
     <div class="container">  <!--타이틀 -->
         <h2 class="font-weight-bold">{{post.title|safe}}</h3>
+            <a class="blockquote-footer" href="{% url 'posts:for_user' username=post.user.username %}"> {{post.user.username}}</a>
         <div class="media-footer d-flex flex-row-reverse">
             <i class="far fa-eye"> {{ hitcount.total_hits }}</i> <!-- 조회수 아이콘 -->
             <small class="text-muted align-middle">{{ post.created_at }}</small>
@@ -15,7 +16,9 @@
             {% endif %}
         </div>
     </div>
+
     <div class="jumbotron">
+        <a href="{{post.link}}">원문 이동</a>
         {{post.text|safe}} 
         <div class="btn-group btn-group-sm" style="margin-bottom:-4em">
             <button class="btn btn-outline-info"><i class="like fas fa-heart" name="{{post.pk}}">
@@ -30,7 +33,6 @@
                         dataType: "json",
             
                         success: function(response){
-                            // alert(response.message);
                             $("#count-"+pk).html(response.like_count+"개");
                         },
                         error: function(request, status, error){
@@ -46,41 +48,45 @@
             <button class="btn btn-link btn-outline-info"><i class="fas fa-bookmark"></i></button> <!--북마크 아이콘 -->
         </div>
     </div>
-    <div>
-        <p class="font-weight-bold">태그</p>
+
+    <div class="container">
+        <h5 class="font-weight-bold">태그</h5>
         {% tags_for_object object as tags %}
         {% for tag in tags %}
         <a href="{% url 'posts:tagged_object_list' tag.name %}">#{{ tag.name }}</a>
         {% endfor %}
     </div>
-    <h3 class="display-5">댓글( {{post.comments.count}} )</h3>
-    {% if user.is_authenticated %}
-    <form action="{% url 'posts:comment_write' pk=post.pk %}" method="POST">
-        {% csrf_token %}
-        <div class="md-form">
-        <textarea class="md-textarea form-control" name="comment_text" rows="2"></textarea>
-        <input type="submit" class="btn btn-outline-primary" value="작성">
-        </div>
-    </form>
-    {% endif %}
-    {% for comment in post.comments.all %}
+
     <div class="container">
-        <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-            <div class="card-body">
-                작성자 {{comment.comment_writer}}
-                <p class="font-weight-light">{{comment.comment_date}}</p>
-                <p class="text-monospace">{{comment.comment_text}}</p>
-                {% if user.is_authenticated and comment.comment_writer == user %}
-                <a class="btn btn-primary btn-sm" href="{% url 'posts:comment_remove' pk=comment.pk %}">
-                    <i class="fas fa-trash-alt"></i></a> <!--삭제 아이콘 -->
-                {% endif %}
+        <h3 class="font-weight-bold">댓글( {{post.comments.count}} )</h3>
+        {% if user.is_authenticated %}
+        <form action="{% url 'posts:comment_write' pk=post.pk %}" method="POST">
+            {% csrf_token %}
+            <div class="md-form">
+            <textarea class="md-textarea form-control" name="comment_text" rows="2"></textarea>
+            <input type="submit" class="btn btn-outline-primary" value="작성">
             </div>
-        </div> 
+        </form>
+        {% endif %}
+
+        {% for comment in post.comments.all %}
+        <div class="container">
+            <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    작성자 {{comment.comment_writer}}
+                    <p class="font-weight-light">{{comment.comment_date}}</p>
+                    <p class="text-monospace">{{comment.comment_text}}</p>
+                    {% if user.is_authenticated and comment.comment_writer == user %}
+                    <a class="btn btn-primary btn-sm" href="{% url 'posts:comment_remove' pk=comment.pk %}">
+                    <i class="fas fa-trash-alt"></i></a> <!--삭제 아이콘 -->
+                    {% endif %}
+                </div>
+            </div> 
+        </div>
+        {% empty %}
+            <div class="bg-light" style="width:17rem";>글이 좋으셨다면 댓글을 남겨주세요 :)</div>
+        {% endfor %}
     </div>
-    {% empty %}
-        <div class="bg-light" style="width:17rem";>글이 좋으셨다면 댓글을 남겨주세요 :)</div>
-    {% endfor %}
-    
 {% endblock %}
 
 
