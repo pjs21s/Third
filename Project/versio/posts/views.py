@@ -16,6 +16,8 @@ except ImportError:
 from hitcount.views import HitCountDetailView
 from .forms import CommentForm
 from .models import Post, Comment
+from tagging.models import Tag, TaggedItem
+from tagging.views import TaggedObjectList
 
 def free_speech(request):
     return render(request, 'posts/free_speech.html')
@@ -33,7 +35,7 @@ class MainPostList(generic.ListView):
     template_name ="posts/main_post_list.html"
     
 class CreatePost(LoginRequiredMixin, generic.CreateView):
-    fields = ('title','link', 'text',)
+    fields = ('title','link', 'text', 'tag')
     model = Post
 
     def form_valid(self, form):
@@ -81,7 +83,7 @@ class PostDetail(HitCountDetailView):
 
 class UpdatePost(generic.UpdateView):
     model = Post
-    fields =['title','text']
+    fields =['title','text','tag']
     success_url = reverse_lazy('posts:all')
 
 @login_required
@@ -115,10 +117,12 @@ def post_like(request):
 
     if not post_like_created:
         post_like.delete()
-        message = "좋아요 취소"
     else:
-        message = "좋아요"
+        pass
 
-    context = {'like_count': post.like_count, 'message': message}
+    context = {'like_count': post.like_count}
     return HttpResponse(json.dumps(context), content_type="application/json")
    
+class PostTOL(TaggedObjectList):
+    model = Post
+    template_name = 'posts/tagging_post_list.html'

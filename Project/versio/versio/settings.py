@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'hitcount',
     'django_social_share',
     'haystack',
-    
+    'tagging',
     
 ]
 

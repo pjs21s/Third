@@ -12,6 +12,7 @@ urlpatterns = [
     path('<int:pk>/comment/', views.comment_write, name='comment_write'),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
     path('like/', views.post_like, name='post_like'),
+    path('tag/<tag>',views.PostTOL.as_view(), name='tagged_object_list'),
 
 
     path('free_speech', views.free_speech, name='free_speech'),

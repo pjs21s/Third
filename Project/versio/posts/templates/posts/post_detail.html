@@ -1,8 +1,9 @@
 {% extends "posts/post_base.html" %}
 {% load social_share %}
+{% load tagging_tags %}
 {% block post_content %}
     <div class="container">  <!--타이틀 -->
-        <h3 class="display-4">{{post.title|safe}}</h3>
+        <h2 class="font-weight-bold">{{post.title|safe}}</h3>
         <div class="media-footer d-flex flex-row-reverse">
             <i class="far fa-eye"> {{ hitcount.total_hits }}</i> <!-- 조회수 아이콘 -->
             <small class="text-muted align-middle">{{ post.created_at }}</small>
@@ -17,9 +18,8 @@
     <div class="jumbotron">
         {{post.text|safe}} 
         <div class="btn-group btn-group-sm" style="margin-bottom:-4em">
-            <input type="button" class="like" name="{{post.pk}}" value="Like">
-            <p id="count-{{post.pk}}">{{ post.like_count }}개</p>
-
+            <button class="btn btn-outline-info"><i class="like fas fa-heart" name="{{post.pk}}">
+            <p id="count-{{post.pk}}">{{ post.like_count }}개</p></i></button>
             <script type="text/javascript">
                 $(".like").click(function(){
                     var pk = $(this).attr('name')
@@ -30,7 +30,7 @@
                         dataType: "json",
             
                         success: function(response){
-                            alert(response.message);
+                            // alert(response.message);
                             $("#count-"+pk).html(response.like_count+"개");
                         },
                         error: function(request, status, error){
@@ -40,12 +40,18 @@
                     })
                 })
             </script>
-            
             <button class="btn btn-link btn-outline-info">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
             <button class="btn btn-link btn-outline-info">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
             <button class="btn btn-link btn-outline-info"><i class="fas fa-bug"></i></button> <!--신고 아이콘 -->
             <button class="btn btn-link btn-outline-info"><i class="fas fa-bookmark"></i></button> <!--북마크 아이콘 -->
         </div>
+    </div>
+    <div>
+        <p class="font-weight-bold">태그</p>
+        {% tags_for_object object as tags %}
+        {% for tag in tags %}
+        <a href="{% url 'posts:tagged_object_list' tag.name %}">#{{ tag.name }}</a>
+        {% endfor %}
     </div>
     <h3 class="display-5">댓글( {{post.comments.count}} )</h3>
     {% if user.is_authenticated %}

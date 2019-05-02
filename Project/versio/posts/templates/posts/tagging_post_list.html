@@ -1,0 +1,8 @@
+{% extends "posts/post_base.html" %}
+{% block body_block %}
+
+<h1 class="font-weight-bold">#{{tag.name}}</h1>
+{% for posts in post_list %}
+<h3><a href="{{ posts.get_absolute_url }}">{{ posts.title }}</a></h3>
+{% endfor %}
+{% endblock %}

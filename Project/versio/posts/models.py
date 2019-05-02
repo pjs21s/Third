@@ -5,17 +5,20 @@ User = get_user_model()
 from ckeditor_uploader.fields import RichTextUploadingField
 from hitcount.models import HitCountMixin
 from django.conf import settings
+from tagging.fields import TagField
 
 class Post(models.Model, HitCountMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     created_at = models.DateTimeField(auto_now=True)
     text = RichTextUploadingField()
     title = models.CharField(max_length=100)
-    link = models.URLField()
+    link = models.URLField(blank=True)
+    tag = TagField(blank=True)
     like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         blank=True,
                                         related_name='like_user_set',
                                         through='Like')
+
 
     def __str__(self):
         return self.title
