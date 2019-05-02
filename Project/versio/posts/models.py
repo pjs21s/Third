@@ -7,6 +7,16 @@ from hitcount.models import HitCountMixin
 from django.conf import settings
 from tagging.fields import TagField
 
+class Category(models.Model):
+    category_name = models.CharField(max_length=30)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+
+    class Meta:
+        unique_together = ["category_name"]
+    
+    def __str__(self):
+        return self.category_name
+
 class Post(models.Model, HitCountMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     created_at = models.DateTimeField(auto_now=True)
@@ -14,11 +24,11 @@ class Post(models.Model, HitCountMixin):
     title = models.CharField(max_length=100)
     link = models.URLField(blank=True)
     tag = TagField(blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         blank=True,
                                         related_name='like_user_set',
                                         through='Like')
-
 
     def __str__(self):
         return self.title

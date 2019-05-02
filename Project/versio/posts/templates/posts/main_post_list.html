@@ -7,9 +7,9 @@
         
             <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title|truncatechars:20}}</a></h5>
-                {{post.text|safe|truncatechars:30}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
-                <cite title="Source Title"><a href="{% url 'posts:for_user' username=post.user.username %}">
-                    <small>by {{post.user.username}}</small></a></cite>
+                {{post.text|safe|truncatechars:50}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
+                <a class="blockquote-footer" href="{% url 'posts:for_user' username=post.user.username %}">
+                {{post.user.username}}</a>
                 <button class="btn btn-outline-dark btn-sm">{{post.link|urlizetrunc:0}}</button>
             </div>
         </div>

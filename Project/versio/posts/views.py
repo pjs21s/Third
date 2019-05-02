@@ -15,15 +15,9 @@ except ImportError:
     import json
 from hitcount.views import HitCountDetailView
 from .forms import CommentForm
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from tagging.models import Tag, TaggedItem
 from tagging.views import TaggedObjectList
-
-def free_speech(request):
-    return render(request, 'posts/free_speech.html')
-
-def translation(request):
-    return render(request, 'posts/translation.html')
 
 class PostList(generic.ListView):
     model = Post
@@ -33,9 +27,19 @@ class PostList(generic.ListView):
 class MainPostList(generic.ListView):
     model = Post
     template_name ="posts/main_post_list.html"
+
+class TransPostList(generic.ListView):
+    model = Post
+    template_name = "posts/post_list.html"
+    queryset = Post.objects.filter(category_id=1) #번역
+
+class FreePostList(generic.ListView):
+    model = Post
+    template_name = "posts/post_list.html"
+    queryset = Post.objects.filter(category_id=2) #자유
     
 class CreatePost(LoginRequiredMixin, generic.CreateView):
-    fields = ('title','link', 'text', 'tag')
+    fields = ('title','link', 'text', 'tag', 'category')
     model = Post
 
     def form_valid(self, form):
@@ -70,7 +74,6 @@ class UserPosts(generic.ListView):
         else:
             return self.post_user.posts.all()
 
-
 class PostDetail(HitCountDetailView):
     model = Post
     count_hit = True
@@ -83,8 +86,12 @@ class PostDetail(HitCountDetailView):
 
 class UpdatePost(generic.UpdateView):
     model = Post
-    fields =['title','text','tag']
+    fields =['title','text','tag','link','category']
     success_url = reverse_lazy('posts:all')
+
+class PostTOL(TaggedObjectList):
+    model = Post
+    template_name = 'posts/tagging_post_list.html'
 
 @login_required
 def comment_write(request, pk):
@@ -123,6 +130,3 @@ def post_like(request):
     context = {'like_count': post.like_count}
     return HttpResponse(json.dumps(context), content_type="application/json")
    
-class PostTOL(TaggedObjectList):
-    model = Post
-    template_name = 'posts/tagging_post_list.html'
