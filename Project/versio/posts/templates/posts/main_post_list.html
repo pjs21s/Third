@@ -3,17 +3,23 @@
 <body>
     <div class="card-columns"> <!-- 메인 페이지 카드 형태 게시물 표시 -->
         {% for post in post_list %}
-        <div class="card shadow-sm p-3 mb-5 bg-white rounded">
-        
-            <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{post.title|truncatechars:20}}</a></h5>
-                {{post.text|safe|truncatechars:50}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
-                <a class="blockquote-footer" href="{% url 'posts:for_user' username=post.user.username %}">
-                {{post.user.username}}</a>
-                <button class="btn btn-outline-dark btn-sm">{{post.link|urlizetrunc:0}}</button>
-            </div>
-        </div>
+        <a style="color: inherit;"class="card-link" href="{% url 'posts:single' username=post.user.username pk=post.pk %}"> 
+            <div class="box card bg-white rounded hoverable view overlay">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">{{post.title|truncatechars:20}}</h5>
+                    {{post.text|safe|truncatechars:50}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
+                    <p class="blockquote-footer">{{post.user.username}}</p>
+                    <div class="mask flex-center rgba-blue-light"><p class="black-text">{{post.category}}</p></div>
+                </div>
+            </div>     
+        </a>  
         {% endfor %}
-    </div>  
+    </div>
 </body>
 {% endblock %}
+<script type="text/javascript"> // 박스 전체를 링크로 만듦
+    $(".box").click(function(){
+        window.location = $(this).find("a").attr("href");
+        return false;
+    })
+</script>
