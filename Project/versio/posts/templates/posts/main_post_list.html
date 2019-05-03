@@ -7,7 +7,7 @@
             <div class="box card bg-white rounded hoverable view overlay">
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">{{post.title|truncatechars:20}}</h5>
-                    {{post.text|safe|truncatechars:50}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
+                    {{post.text|safe|truncatechars:40}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
                     <p class="blockquote-footer">{{post.user.username}}</p>
                     <div class="mask flex-center rgba-blue-light"><p class="black-text">{{post.category}}</p></div>
                 </div>

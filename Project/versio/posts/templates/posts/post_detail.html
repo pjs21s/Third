@@ -2,9 +2,10 @@
 {% load social_share %}
 {% load tagging_tags %}
 {% block post_content %}
+
     <div class="container">  <!--타이틀 -->
-        <h2 class="font-weight-bold">{{post.title|safe}}</h3>
-            <a class="blockquote-footer" href="{% url 'posts:for_user' username=post.user.username %}"> {{post.user.username}}</a>
+        <h1 class="font-weight-bold text-center">{{post.title|safe}}</h1>
+            <a class="blockquote-footer text-center" href="{% url 'posts:for_user' username=post.user.username %}"> {{post.user.username}}</a>
         <div class="media-footer d-flex flex-row-reverse">
             <i class="far fa-eye"> {{ hitcount.total_hits }}</i> <!-- 조회수 아이콘 -->
             <small class="text-muted align-middle">{{ post.created_at }}</small>
@@ -19,9 +20,37 @@
 
     <div class="jumbotron">
         <a href="{{post.link}}">원문 이동</a>
-        {{post.text|safe}} 
+
+        <script type="text/javascript">
+            var bDisplay = true;
+            function doDisplay(){
+                var con = document.getElementById("myDIV");
+                if(con.style.display=='none'){
+                    con.style.display = 'block';
+                }else{
+                    con.style.display = 'none';
+                }
+            }
+        </script>
+        <a href="javascript:doDisplay();">자동번역</a>
+        <div style="display:none;" id="myDIV">
+            <div class="translate">{{post.text|safe}}</p>
+                <div class="translate_control" lang="en"></div>
+                <script>
+                function googleSectionalElementInit() {
+                    new google.translate.SectionalElement({
+                    sectionalNodeClassName: 'translate',
+                    controlNodeClassName: 'translate_control',
+                    background: '#f4fa58'
+                    }, 'google_sectional_element');
+                }
+                </script>
+                <script src="//translate.google.com/translate_a/element.js?cb=googleSectionalElementInit&ug=section&hl=en"></script>
+            </div>
+        </div>
+        {{post.text|safe}}
         <div class="btn-group btn-group-sm" style="margin-bottom:-4em">
-            <button class="btn btn-outline-info"><i class="like fas fa-heart" name="{{post.pk}}">
+            <button class="btn btn-light"><i class="like fas fa-heart" name="{{post.pk}}">
             <p id="count-{{post.pk}}">{{ post.like_count }}개</p></i></button>
             <script type="text/javascript">
                 $(".like").click(function(){
@@ -42,19 +71,15 @@
                     })
                 })
             </script>
-            <button class="btn btn-link btn-outline-info">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
-            <button class="btn btn-link btn-outline-info">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
-            <button class="btn btn-link btn-outline-info"><i class="fas fa-bug"></i></button> <!--신고 아이콘 -->
-            <button class="btn btn-link btn-outline-info"><i class="fas fa-bookmark"></i></button> <!--북마크 아이콘 -->
+            <button class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
+            <button class="btn btn-light">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
+            
+            <h5 class="font-weight-bold">태그</h5>
+                {% tags_for_object object as tags %}
+                {% for tag in tags %}
+                <a href="{% url 'posts:tagged_object_list' tag.name %}">#{{ tag.name }}</a>
+                {% endfor %}
         </div>
-    </div>
-
-    <div class="container">
-        <h5 class="font-weight-bold">태그</h5>
-        {% tags_for_object object as tags %}
-        {% for tag in tags %}
-        <a href="{% url 'posts:tagged_object_list' tag.name %}">#{{ tag.name }}</a>
-        {% endfor %}
     </div>
 
     <div class="container">
