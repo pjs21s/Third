@@ -18,7 +18,7 @@
 </body>
 {% endblock %}
 <script type="text/javascript"> // 박스 전체를 링크로 만듦
-    $(".box").click(function(){
+    $(".box").click( () =>{
         window.location = $(this).find("a").attr("href");
         return false;
     })

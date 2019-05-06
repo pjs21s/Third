@@ -22,9 +22,9 @@
         <a href="{{post.link}}">원문 이동</a>
 
         <script type="text/javascript">
-            var bDisplay = true;
+            const bDisplay = true;
             function doDisplay(){
-                var con = document.getElementById("myDIV");
+                const con = document.getElementById("myDIV");
                 if(con.style.display=='none'){
                     con.style.display = 'block';
                 }else{
@@ -54,17 +54,17 @@
             <p id="count-{{post.pk}}">{{ post.like_count }}개</p></i></button>
             <script type="text/javascript">
                 $(".like").click(function(){
-                    var pk = $(this).attr('name')
+                    const pk = $(this).attr('name')
                     $.ajax({
                         type: "POST",
                         url: "{% url 'posts:post_like'%}",
                         data: {'pk': pk, 'csrfmiddlewaretoken': '{{csrf_token}}'},
                         dataType: "json",
             
-                        success: function(response){
+                        success: (response) => {
                             $("#count-"+pk).html(response.like_count+"개");
                         },
-                        error: function(request, status, error){
+                        error: (request, status, error) => {
                             alert("로그인이 필요합니다.")
                             window.location.replace("/accounts/login/")
                         },
