@@ -28,6 +28,15 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def get_absolute_url(self):
+        return reverse(
+            "accounts:profile",
+            kwargs={
+                "username": self.user.username,
+                "pk": self.pk
+            }
+        )
+
 @receiver(post_save, sender=auth.models.User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
