@@ -9,7 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-
+from .forms import UserCreateForm, ProfileForm
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 # Create your views here.
 class Register(generic.CreateView):
     form_class = forms.UserCreateForm
@@ -30,11 +32,26 @@ class DeleteUser(LoginRequiredMixin, generic.DeleteView):
         queryset = super().get_queryset()
         return queryset.filter(id=self.request.user.pk)
 
-class ModifyUser(generic.UpdateView):
-    model = User
-    fields =['email']
-    success_url = reverse_lazy('accounts:login')
-    template_name = "accounts/register.html"
+@login_required
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserCreateForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('accounts:login')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        user_form = UserCreateForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'accounts/change_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
 
 def change_password(request):
     if request.method == 'POST':
