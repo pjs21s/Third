@@ -18,10 +18,9 @@ class UserCreateForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ("bio", "location", "lang")
+        fields = ("bio", "lang")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["bio"].label = "자기소개"
-        self.fields["location"].label = "거주지"
         self.fields["lang"].label = "언어"

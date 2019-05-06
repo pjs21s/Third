@@ -1,19 +1,7 @@
 {% extends "posts/post_base.html" %}
 
 {% block post_content %}
-<div class="col-lg"> <!-- 게시판 테이블 상단 head -->
-	<div class="table-responsive">
-		<table class="table">
-		<thaed>
-			<tr>
-			<th class="font-weight-bold" scope="col">번호</th>
-			<th class="font-weight-bold" scope="col">제목</th>
-			<th class="font-weight-bold" scope="col">작성자</th>
-			<th class="font-weight-bold" scope="col">작성일시</th>
-			</tr>
-		</thaed>
-		</table>
-	</div>	    
+   
 	{% for post in post_list %}
         {% include "posts/_post.html" %}
 	{% endfor %}

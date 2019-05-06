@@ -52,19 +52,3 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
-
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, '성공적으로 변경되었습니다.')
-            return redirect('accounts:login')
-        else:
-            messages.error(request, '문제가 있습니다.')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'accounts/change_password.html', {
-        'form': form
-    })

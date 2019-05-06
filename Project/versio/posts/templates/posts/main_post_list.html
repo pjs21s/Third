@@ -5,11 +5,11 @@
         {% for post in post_list %}
         <a style="color: inherit;"class="card-link" href="{% url 'posts:single' username=post.user.username pk=post.pk %}"> 
             <div class="box card bg-white rounded hoverable view overlay">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold">{{post.title|truncatechars:20}}</h5>
-                    {{post.text|safe|truncatechars:40}} <!--truncate 삭제하면 이미지 나타남 하지만 사이즈 문제있음-->
+                <div class="card-body text-center">
+                    <div class="mask flex-center rgba-blue-light"><h1 class="display-4">{{post.category}}</h1></div>
+                    <h5 class="card-title font-weight-bold ">{{post.title|truncatechars:20}}</h5>
                     <p class="blockquote-footer">{{post.user.username}}</p>
-                    <div class="mask flex-center rgba-blue-light"><p class="black-text">{{post.category}}</p></div>
+                    <p class="card-text">{{post.text|safe|truncatechars:40}}</p>
                 </div>
             </div>     
         </a>  

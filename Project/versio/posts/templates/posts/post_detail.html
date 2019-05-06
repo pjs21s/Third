@@ -5,7 +5,7 @@
 
     <div class="container">  <!--타이틀 -->
         <h1 class="font-weight-bold text-center">{{post.title|safe}}</h1>
-            <a class="blockquote-footer text-center" href="{% url 'posts:for_user' username=post.user.username %}"> {{post.user.username}} {{user.profile.lang}}</a>
+            <a class="blockquote-footer text-center" href="{% url 'posts:for_user' username=post.user.username %}"> {{post.user.username}} {{post.user.profile.lang}}</a>
         <div class="media-footer d-flex flex-row-reverse">
             <i class="far fa-eye"> {{ hitcount.total_hits }}</i> <!-- 조회수 아이콘 -->
             <small class="text-muted align-middle">{{ post.created_at }}</small>
@@ -19,8 +19,9 @@
     </div>
 
     <div class="jumbotron">
-        <a href="{{post.link}}">원문 이동</a>
-
+        {% if post.link and not hide_link %}
+        <a href="{{post.link}}" title="link">원문 이동</a>
+        {% endif %}
         <script type="text/javascript">
             const bDisplay = true;
             function doDisplay(){
@@ -32,7 +33,7 @@
                 }
             }
         </script>
-        <a href="javascript:doDisplay();">자동번역</a>
+        <a href="javascript:doDisplay();">한글-영어 자동 번역</a>
         <div style="display:none;" id="myDIV">
             <div class="translate">{{post.text|safe}}</p>
                 <div class="translate_control" lang="en"></div>
