@@ -12,6 +12,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from .forms import UserCreateForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from posts.models import Post
 # Create your views here.
 class Register(generic.CreateView):
     form_class = forms.UserCreateForm
@@ -31,6 +32,20 @@ class DeleteUser(LoginRequiredMixin, generic.DeleteView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(id=self.request.user.pk)
+
+class UserPosts(generic.ListView):
+    model = Post
+    template_name = "posts/user_post_list.html"
+
+    def get_queryset(self):
+        try:
+            self.post_user = User.objects.prefetch_related("posts").get(
+                username__iexact=self.kwargs.get("username")
+            )
+        except User.DoesNotExist:
+            raise Http404
+        else:
+            return self.post_user.posts.all()
 
 @login_required
 @transaction.atomic
