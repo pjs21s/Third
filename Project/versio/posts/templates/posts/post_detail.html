@@ -22,33 +22,7 @@
         {% if post.link and not hide_link %}
         <a href="{{post.link}}" title="link">원문 이동</a>
         {% endif %}
-        <script type="text/javascript">
-            const bDisplay = true;
-            function doDisplay(){
-                const con = document.getElementById("myDIV");
-                if(con.style.display=='none'){
-                    con.style.display = 'block';
-                }else{
-                    con.style.display = 'none';
-                }
-            }
-        </script>
-        <a href="javascript:doDisplay();">한글-영어 자동 번역</a>
-        <div style="display:none;" id="myDIV">
-            <div class="translate">{{post.text|safe}}</p>
-                <div class="translate_control" lang="en"></div>
-                <script>
-                function googleSectionalElementInit() {
-                    new google.translate.SectionalElement({
-                    sectionalNodeClassName: 'translate',
-                    controlNodeClassName: 'translate_control',
-                    background: '#f4fa58'
-                    }, 'google_sectional_element');
-                }
-                </script>
-                <script src="//translate.google.com/translate_a/element.js?cb=googleSectionalElementInit&ug=section&hl=en"></script>
-            </div>
-        </div>
+       
         {{post.text|safe}}
         <div class="btn-group btn-group-sm" style="margin-bottom:-4em">
             <button class="btn btn-light"><i class="like fas fa-heart" name="{{post.pk}}">

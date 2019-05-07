@@ -158,7 +158,7 @@ CKEDITOR_CONFIGS = {
             ['Bold', 'Italic', 'Underline'],
             ['Font', 'FontSize'],
             ['NumberedList', 'BulletedList', '-','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink', 'Image']
+            ['Link', 'Unlink', 'Image','Iframe']
         ],
        'removeDialogTabs': ';'.join([
             'image:advanced',

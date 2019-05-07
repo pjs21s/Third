@@ -3,7 +3,6 @@ from django.contrib import auth
 from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from posts.models import Post
 
 # Create your models here.
 class User(auth.models.User, auth.models.PermissionsMixin):
