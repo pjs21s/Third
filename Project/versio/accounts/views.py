@@ -49,7 +49,7 @@ def update_profile(request):
     else:
         user_form = UserCreateForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'accounts/change_profile.html', {
+    return render(request, 'accounts/update_profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
