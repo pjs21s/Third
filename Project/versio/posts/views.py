@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.views import generic
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
@@ -20,26 +20,26 @@ from tagging.models import Tag, TaggedItem
 from tagging.views import TaggedObjectList
 
 
-class PostList(generic.ListView):
+class PostList(ListView):
     model = Post
     paginate_by = 10
     queryset = Post.objects.all()
     
-class MainPostList(generic.ListView):
+class MainPostList(ListView):
     model = Post
     template_name ="posts/main_post_list.html"
 
-class TransPostList(generic.ListView):
+class TransPostList(ListView):
     model = Post
     template_name = "posts/post_list.html"
     queryset = Post.objects.filter(category_id=1) #번역
 
-class FreePostList(generic.ListView):
+class FreePostList(ListView):
     model = Post
     template_name = "posts/post_list.html"
     queryset = Post.objects.filter(category_id=2) #자유
     
-class CreatePost(LoginRequiredMixin, generic.CreateView):
+class CreatePost(LoginRequiredMixin, CreateView):
     fields = ('title','link', 'text', 'tag', 'category')
     model = Post
 
@@ -49,7 +49,7 @@ class CreatePost(LoginRequiredMixin, generic.CreateView):
         self.object.save()
         return super().form_valid(form)
 
-class DeletePost(LoginRequiredMixin, generic.DeleteView):
+class DeletePost(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy("posts:all")
 
@@ -61,7 +61,7 @@ class DeletePost(LoginRequiredMixin, generic.DeleteView):
         messages.success(self.request, "Post Deleted")
         return super().delete(*args, **kwargs)
     
-class UserPosts(generic.ListView):
+class UserPosts(ListView):
     model = Post
     template_name = "posts/user_post_list.html"
 
@@ -85,7 +85,7 @@ class PostDetail(HitCountDetailView):
             user__username__iexact=self.kwargs.get("username")
         )
 
-class UpdatePost(generic.UpdateView):
+class UpdatePost(UpdateView):
     model = Post
     fields =['title','text','tag','link','category']
     success_url = reverse_lazy('posts:all')

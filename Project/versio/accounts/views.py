@@ -2,7 +2,7 @@ from . import forms
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.contrib.auth import login, logout
-from django.views import generic
+from django.views.generic import CreateView, DetailView, DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -14,17 +14,17 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from posts.models import Post
 # Create your views here.
-class Register(generic.CreateView):
+class Register(CreateView):
     form_class = forms.UserCreateForm
     success_url = reverse_lazy("accounts:login")
     template_name = "accounts/register.html"
 
-class Profile(generic.DetailView):
+class Profile(DetailView):
     model = User
     success_url = reverse_lazy("accounts:profile")
     template_name = "accounts/profile.html"
 
-class DeleteUser(LoginRequiredMixin, generic.DeleteView):
+class DeleteUser(LoginRequiredMixin, DeleteView):
     model = User
     success_url = reverse_lazy("accounts:login")
     template_name = "accounts/user_confirm_delete.html"
