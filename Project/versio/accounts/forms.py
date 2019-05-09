@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
-from django import forms
+from django.forms import ModelForm
 
 class UserCreateForm(UserCreationForm):
     class Meta:
@@ -15,7 +15,7 @@ class UserCreateForm(UserCreationForm):
         self.fields["password1"].label = "비밀번호"
         self.fields["password2"].label = "비밀번호 확인"
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ("bio", "lang")

@@ -60,7 +60,7 @@ class Comment(models.Model):
         return self.comment_text
 
     class Meta:
-        ordering = ["comment_date"]
+        ordering = ["-comment_date"]
 
 class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -68,4 +68,6 @@ class Like(models.Model):
 
     def __str__(self):
         return self.user.username +" | "+ self.post.title
+
+
 

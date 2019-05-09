@@ -1,13 +1,12 @@
 {% extends "posts/post_base.html" %}
-
 {% block post_content %}
-   
-	{% for post in post_list %}
-        {% include "posts/_post.html" %}
-	{% endfor %}
+
+{% for post in post_list %}
+  {% include "posts/_post.html" %}
+{% endfor %}
 <!-- 페이지네이션 코드 -->
-	{% if is_paginated %}
-  	<ul class="pagination pg-blue justify-content-center">
+{% if is_paginated %}
+  <ul class="pagination pg-blue justify-content-center">
     {% if page_obj.has_previous %}
       <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
     {% else %}
@@ -25,7 +24,7 @@
     {% else %}
       <li class="page-link disabled"><span>&raquo;</span></li>
     {% endif %}
-  	</ul>
-	{% endif %}
+  </ul>
+{% endif %}
 </div>
 {% endblock %}

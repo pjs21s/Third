@@ -6,9 +6,7 @@
   <form method="POST" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
-    {% buttons %}
-      <button type="submit" class="btn btn-primary">로그인</button>
-    {% endbuttons %}
+    <button type="submit" class="btn btn-primary">로그인</button>
   </form>
 </div>
 {% endblock %}

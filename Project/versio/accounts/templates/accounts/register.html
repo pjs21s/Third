@@ -1,22 +1,12 @@
 {% extends "base.html"%}
 {% load bootstrap4 %}
 {% block body_block %}
-{% if not form.instance.pk %}
 <h2 class="font-weight-bold">회원가입</h2>
-{% else %}
-<h2 class="font-weight-bold">회원수정</h2>
-{% endif %}
     <div class="container">
         <form method="POST" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}
-            {% buttons %}
-            {% if not form.instance.pk %}
             <button type="submit" class="btn btn-primary">회원가입</button>
-            {% else %}
-            <button type="submit" class="btn btn-primary">회원수정</button>
-            {% endif %}
-            {% endbuttons %}
         </form>
     </div>
 {% endblock %}

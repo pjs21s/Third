@@ -9,7 +9,7 @@ class User(auth.models.User, auth.models.PermissionsMixin):
     
     def __str__(self):
         return self.username
-    
+
 class Profile(models.Model):
     user = models.OneToOneField(auth.models.User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(max_length=300, blank=True)
@@ -22,6 +22,7 @@ class Profile(models.Model):
         return reverse(
             "accounts:profile",
             kwargs={
+                "username": self.user.username,
                 "pk": self.pk
             }
         )

@@ -1,6 +1,5 @@
 {% extends "posts/post_base.html" %}
 {% block post_content %}
-<body>
     <div class="card-columns"> <!-- 메인 페이지 카드 형태 게시물 표시 -->
         {% for post in post_list %}
         <a style="color: inherit;"class="card-link" href="{% url 'posts:single' username=post.user.username pk=post.pk %}"> 
@@ -14,7 +13,6 @@
         </a>  
         {% endfor %}
     </div>
-</body>
 {% endblock %}
 <script type="text/javascript"> // 박스 전체를 링크로 만듦
     $(".box").click( () =>{

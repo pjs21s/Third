@@ -6,12 +6,11 @@
 {% else %}
 <h2 class="font-weight-bold">포스트 수정</h2>
 {% endif %}
-{{ form.media }}
+
+{{ form.media }} <!--CKEditor 불러오기 위해-->
 <form method="POST" id="postForm">
     {% csrf_token %}
     {% bootstrap_form form %} 
-    {% buttons %}
-        <button type="submit" class="btn btn-primary">포스팅</button>
-    {% endbuttons %}
+    <button type="submit" class="btn btn-primary">포스팅</button>
 </form>
 {% endblock %}

@@ -2,7 +2,6 @@
 {% load social_share %}
 {% load tagging_tags %}
 {% block post_content %}
-
 <div class="container">  <!--타이틀 -->
     <h1 class="font-weight-bold text-center">{{post.title|safe}}</h1>
         <a class="blockquote-footer text-center" href="{% url 'accounts:profile' username=post.user.username pk=post.user.pk %}"> {{post.user.username}} {{post.user.profile.lang}}</a>
@@ -22,7 +21,6 @@
     {% if post.link and not hide_link %}
     <a href="{{post.link}}" title="link">원문 이동</a>
     {% endif %}
-       
     {{post.text|safe}}
     <div class="btn-group btn-group-sm" style="margin-bottom:-4em">
         <button class="btn btn-light"><i class="like fas fa-heart" name="{{post.pk}}">

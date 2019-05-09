@@ -28,6 +28,7 @@ class PostList(ListView):
 class MainPostList(ListView):
     model = Post
     template_name ="posts/main_post_list.html"
+    queryset = Post.objects.exclude(category_id=4) #번역요청은 제외하고 출력
 
 class TransPostList(ListView):
     model = Post
@@ -39,6 +40,11 @@ class FreePostList(ListView):
     template_name = "posts/post_list.html"
     queryset = Post.objects.filter(category_id=2) #자유
     
+class AskTransList(ListView):
+    model = Post
+    template_name = "posts/ask_trans.html"
+    queryset = Post.objects.filter(category_id=4) #번역요청
+
 class CreatePost(LoginRequiredMixin, CreateView):
     fields = ('title','link', 'text', 'tag', 'category')
     model = Post

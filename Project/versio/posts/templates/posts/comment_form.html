@@ -1,9 +1,8 @@
 {% load bootstrap4 %}
 {% block content %}
-    <h1>새로운 댓글</h1>
-    <form method="POST" class="post-form">
+<form method="POST" class="post-form">
     {% csrf_token %}
     {% bootstrap_form form %} 
     <button type="submit" class="save btn btn-default">댓글 작성</button>
-    </form>
+</form>
 {% endblock %}

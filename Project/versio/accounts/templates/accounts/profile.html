@@ -1,25 +1,23 @@
 {% extends "base.html"%}
 {% block body_block %}
-    <h1>{{user.username}}의 프로필 <button class="btn btn-outline-success">구독</button></a></h1>
-    <h5>주 언어 : {{user.profile.lang}}</h5>
-    <p>{{user.profile.bio}}</p>
-    <div class="row">
-        <div class="col-3">
-          <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link" href="{% url 'posts:for_user' username=user.username %}">작성한 글</a>
-            <a class="nav-link" >작성한 댓글</a>
-
-          <li class="nav-item dropdown" title="modify">
-            <a class="nav-link dropdown-toggle" id="settings-tab" data-toggle="dropdown" href="#settings" role="button"
-              aria-controls="settings" aria-selected="false" aria-haspopup="true" aria-expanded="false">회원정보</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="{% url 'accounts:update_profile' %}">프로필 수정</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'accounts:remove' pk=user.pk %}">탈퇴</a>
-            </div>
-          </li>
-
-          </div>
+  <h1>{{user.username}}의 프로필 <button class="btn btn-outline-success">구독</button></a></h1>
+  <h5>주 언어 : {{user.profile.lang}}</h5>
+  <p>{{user.profile.bio}}</p>
+  <div class="row">
+    <div class="col-3">
+      <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link" href="{% url 'posts:for_user' username=user.username %}">작성한 글</a>
+        <a class="nav-link" >작성한 댓글</a>
+      <li class="nav-item dropdown" title="modify">
+        <a class="nav-link dropdown-toggle" id="settings-tab" data-toggle="dropdown" href="#settings" role="button"
+            aria-controls="settings" aria-selected="false" aria-haspopup="true" aria-expanded="false">회원정보</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'accounts:update_profile' %}">프로필 수정</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'accounts:remove' pk=user.pk %}">탈퇴</a>
         </div>
+      </li>
       </div>
+    </div>
+  </div>
 {% endblock %}

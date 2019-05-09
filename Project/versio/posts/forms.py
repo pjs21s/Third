@@ -1,12 +1,12 @@
-from django import forms
+from django.forms import ModelForm
 from . import models
 
-class PostForm(forms.ModelForm):
+class PostForm(ModelForm):
     class Meta:
        fields = ("title","category", "link", "text", "tag")
        model = models.Post
     
-class CommentForm(forms.ModelForm):
+class CommentForm(ModelForm):
     class Meta:
         model = models.Comment
         fields = ('comment_text',)
