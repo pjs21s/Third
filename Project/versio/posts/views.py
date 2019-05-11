@@ -42,7 +42,7 @@ class FreePostList(ListView):
     
 class AskTransList(ListView):
     model = Post
-    template_name = "posts/ask_trans.html"
+    template_name = "posts/post_list.html"
     queryset = Post.objects.filter(category_id=4) #번역요청
 
 class CreatePost(LoginRequiredMixin, CreateView):

@@ -1,13 +1,9 @@
-<div class="table-responsive col-lg"> <!-- 게시물 테이블 -->
-    <table class="table">
-    <tbody>
-        <tr scope="row">
-          <td>{{post.id}}</td>
-          <td><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">
-            {{post.title|truncatechars:15}}</a>( {{post.comments.count}} )</td>
-          <td><a href="{% url 'posts:for_user' username=post.user.username %}">{{post.user.username}}</a></td>
-          <td>{{ post.created_at }}</td>  
-        </tr>
-    </tbody>
-    </table>
-</div>
+<a style="color: inherit;" class="card-link" href="{% url 'posts:single' username=post.user.username pk=post.pk %}">
+    <div class="box card bg-white rounded">
+        <div class="card-body">
+            {{post.user.username}}
+            <p class="font-weight-light">{{post.created_at}}</p>
+            <p class="font-weight-bold">{{post.title}}</p>
+        </div>
+    </div>
+</a>

@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 {% block body_block %}
-  <h1>{{user.username}}의 프로필 <button class="btn btn-outline-success">구독</button></a></h1>
+  <h1>{{user.username}}의 프로필, 활동점수</h1>
   <h5>주 언어 : {{user.profile.lang}}</h5>
   <p>{{user.profile.bio}}</p>
   <div class="row">
@@ -19,5 +19,6 @@
       </li>
       </div>
     </div>
+  
   </div>
 {% endblock %}
