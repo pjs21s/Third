@@ -7,6 +7,7 @@ from hitcount.models import HitCountMixin, HitCount
 from django.conf import settings
 from tagging.fields import TagField
 from django.contrib.contenttypes.fields import GenericRelation
+from django.db.models import Count
 
 class Category(models.Model):
     category_name = models.CharField(max_length=30)

@@ -24,7 +24,6 @@ class Profile(models.Model):
         return reverse(
             "accounts:profile",
             kwargs={
-                "username": self.user.username,
                 "pk": self.pk
             }
         )
