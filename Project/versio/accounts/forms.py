@@ -15,6 +15,7 @@ class UserCreateForm(UserCreationForm):
         self.fields["password1"].label = "비밀번호"
         self.fields["password2"].label = "비밀번호 확인"
 
+
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
