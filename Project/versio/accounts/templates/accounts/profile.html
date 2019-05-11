@@ -8,6 +8,7 @@
     <div class="col-3">
       <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link" href="{% url 'posts:for_user' username=user.username %}">작성한 글</a>
+      {% if user.is_authenticated and user == request.user and not hide_modify %}
       <li class="nav-item dropdown" title="modify">
         <a class="nav-link dropdown-toggle" id="settings-tab" data-toggle="dropdown" href="#settings" role="button"
             aria-controls="settings" aria-selected="false" aria-haspopup="true" aria-expanded="false">회원정보</a>
@@ -17,6 +18,7 @@
           <a class="dropdown-item" href="{% url 'accounts:remove' pk=user.pk %}">탈퇴</a>
         </div>
       </li>
+      {% endif %}
       </div>
     </div>
 

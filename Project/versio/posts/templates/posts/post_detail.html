@@ -4,7 +4,7 @@
 {% block post_content %}
 <div class="container">  <!--타이틀 -->
     <h1 class="font-weight-bold text-center">{{post.title|safe}}</h1>
-        <a class="blockquote-footer text-center" href="{% url 'accounts:profile' username=post.user.username pk=post.user.pk %}"> {{post.user.username}} {{post.user.profile.lang}}</a>
+        <a class="blockquote-footer text-center" href="{% url 'accounts:profile' pk=post.user.pk %}"> {{post.user.username}} {{post.user.profile.lang}}</a>
     <div class="media-footer d-flex flex-row-reverse">
         <i class="far fa-eye"> {{ hitcount.total_hits }}</i> <!-- 조회수 아이콘 -->
         <small class="text-muted align-middle">{{ post.created_at }}</small>
