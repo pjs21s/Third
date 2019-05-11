@@ -28,7 +28,7 @@ class PostList(ListView):
 class MainPostList(ListView):
     model = Post
     template_name ="posts/main_post_list.html"
-    queryset = Post.objects.exclude(category_id=4) #번역요청은 제외하고 출력
+    queryset = Post.objects.exclude(category_id=4).order_by("-hit_count_generic__hits") #번역요청은 제외하고 출력, 조회수 순으로
 
 class TransPostList(ListView):
     model = Post

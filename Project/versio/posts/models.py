@@ -3,9 +3,10 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from ckeditor_uploader.fields import RichTextUploadingField
-from hitcount.models import HitCountMixin
+from hitcount.models import HitCountMixin, HitCount
 from django.conf import settings
 from tagging.fields import TagField
+from django.contrib.contenttypes.fields import GenericRelation
 
 class Category(models.Model):
     category_name = models.CharField(max_length=30)
@@ -29,6 +30,10 @@ class Post(models.Model, HitCountMixin):
                                         blank=True,
                                         related_name='like_user_set',
                                         through='Like')
+    hit_count_generic = GenericRelation(
+    HitCount, object_id_field='object_pk',
+    related_query_name='hit_count_generic_relation')
+
 
     def __str__(self):
         return self.title
