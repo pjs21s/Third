@@ -1,6 +1,7 @@
 {% extends "base.html"%}
+{% load hitcount_tags %}
 {% block body_block %}
-  <h1>{{user.username}}의 프로필, 활동점수</h1>
+  <h1>{{user.username}}의 프로필, 활동점수 {{user.posts.count|add:user.profile.logined_count}}</h1> <!--포스트한 횟수 + 로그인한 횟수-->
   <h5>주 언어 : {{user.profile.lang}}</h5>
   <p>{{user.profile.bio}}</p>
   <div class="row">
@@ -19,6 +20,6 @@
       </li>
       </div>
     </div>
-  
+
   </div>
 {% endblock %}
