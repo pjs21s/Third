@@ -29,4 +29,4 @@ You can check more library what i used in `requirements.txt`
 
 I wrote knowledge i got from this project in <https://pjs21s.github.io/>
 
-Thanks
+**Thanks**
