@@ -1,32 +1,28 @@
-# Made Website using Django
+# django를 기반으로 웹사이트를 제작
 
-django를 기반으로 번역 커뮤니티를 만들었습니다.
-I made translation community website using django.
+번역 커뮤니티를 만들었습니다.
 
-# Motivation
+# 동기
 
-평소 번역을 취미로 하는데 좋은 번역 글과 관련한 정보들이 한데 모여있으면 좋겠다는 생각으로 만들었습니다.
-190401 ~ 190605까지 완성할 예정입니다.
+평소 번역을 취미로 하는데 번역 글이나 정보들이 퍼져있는것에 아쉬움을 느꼈습니다. 그래서 그러한 글과 정보들을 한데 모아 볼 수 있는 커뮤니티 사이트를 만들면 좋겠다고 생각했습니다.
+2019년 3월에는 python, django의 기초를 공부했습니다.
+2019년 04월부터 ~ 06월 초 까지 완성할 예정입니다.
 
-I translate some article as hobby, I thought it's so good to see good translation infromation in one website.
-That's why i made this website.
-start from 190401 - will be end 190605
-
-# Demo
+# 데모
 
 <https://pjs21s.pythonanywhere.com/>
 
-# Tech used
+# 사용한 기술
 
 MDBootstrap, Bootstrap4, django, python, html, css, javascript, sqlite
 그 외 사용한 라이브러리는 `requirements.txt`에 포함되어 있습니다.
 
-You can check more library what i used in `requirements.txt`
+# 아쉬운 점, 추가했으면 하는 기능
+
+(향후 추가)
 
 # ETC
 
 제작하면서 얻은 지식이나 관련 정보는 <https://pjs21s.github.io/>에 적어두었습니다.
 
-I wrote knowledge i got from this project in <https://pjs21s.github.io/>
-
-**Thanks**
+**감사합니다.**
