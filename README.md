@@ -1,3 +1,5 @@
+[ENG.ver README.md](https://github.com/pjs21s/Capstone_Website_django/blob/master/ENG_README.md)
+
 # django를 기반으로 웹사이트를 제작
 
 번역 커뮤니티를 만들었습니다.
