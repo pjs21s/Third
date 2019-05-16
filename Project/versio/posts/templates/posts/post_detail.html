@@ -22,7 +22,7 @@
     <a href="{{post.link}}" title="link">원문 이동</a>
     {% endif %}
     {{post.text|safe}}
-    <div class="btn-group btn-group-sm" style="margin-bottom:-4em">
+    <div class="btn-group btn-group-sm" style="margin-bottom:-2em">
         <button class="btn btn-light"><i class="like fas fa-heart" name="{{post.pk}}">
             <p id="count-{{post.pk}}">{{ post.like_count }}개</p></i></button>
             <script type="text/javascript">
@@ -44,8 +44,8 @@
                     })
                 })
             </script>
-            <button class="btn btn-light">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
-            <button class="btn btn-light">{% post_to_twitter post.title post.get_absolute_url "Twitter" %}</button>
+            <button class="btn btn-light">{% post_to_facebook post.get_absolute_url "페이스북" %}</button>
+            <button class="btn btn-light">{% post_to_twitter post.title post.get_absolute_url "트위터" %}</button>
             
         <h5 class="font-weight-bold">태그</h5>
             {% tags_for_object object as tags %}

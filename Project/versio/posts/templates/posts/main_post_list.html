@@ -1,18 +1,19 @@
 {% extends "posts/post_base.html" %}
 {% block post_content %}
-    <div class="card-columns"> <!-- 메인 페이지 카드 형태 게시물 표시 -->
-        {% for post in post_list %}
-        <a style="color: inherit;"class="card-link" href="{% url 'posts:single' username=post.user.username pk=post.pk %}"> 
-            <div class="box card bg-white rounded hoverable view overlay">
-                <div class="card-body text-center">
-                    <div class="mask flex-center rgba-blue-light"><h1 class="display-4">{{post.category}}</h1></div>
-                    <h5 class="card-title font-weight-bold ">{{post.title}}</h5>
-                    <p class="blockquote-footer">{{post.user.username}}</p>
-                </div>
-            </div>     
-        </a>  
-        {% endfor %}
-    </div>
+<div class="card-columns">
+<!-- 메인 페이지 카드 형태 게시물 표시 -->
+    {% for post in post_list %}
+    <a style="color: inherit;"class="card-link" href="{% url 'posts:single' username=post.user.username pk=post.pk %}"> 
+        <div class="box card bg-white rounded hoverable view overlay">
+            <div class="card-body text-center">
+                <div class="mask flex-center rgba-blue-light"><h1 class="display-4">{{post.category}}</h1></div>
+                <h5 class="card-title font-weight-bold ">{{post.title}}</h5>
+                <p class="blockquote-footer">{{post.user.username}}</p>
+            </div>
+        </div>     
+    </a>  
+    {% endfor %}
+</div>
 {% endblock %}
 <script type="text/javascript"> // 박스 전체를 링크로 만듦
     $(".box").click( () =>{

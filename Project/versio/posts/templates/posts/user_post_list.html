@@ -1,11 +1,12 @@
 {% extends "posts/post_base.html" %}
 {% block prepost %}
-	<h3>작성한 글</h3>
+	<h3 class="font-weight-bold">작성한 글</h3>
 {% endblock %}
 {% block post_content %}
 <div class="col-lg">
 	{% for post in post_list %}
 		{% include "posts/_post.html" %}
 	{% endfor %}
+
 </div>
 {% endblock %}
