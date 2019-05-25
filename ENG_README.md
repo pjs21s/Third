@@ -1,6 +1,6 @@
 # Made website using django
 
-I made translation community website.
+I made translation community website. User upload new perspective columns translated by various languages. Also i made board to ask translation what they want to read.
 
 # Motivation
 
@@ -19,6 +19,15 @@ You can check more libraries what i used in `requirements.txt`
 # Add functions what i hoped
 
 (Will write more)
+
+# Issues
+
+XSS Protection - Add `SECURE_BROWSER_XSS_FILTER = True` in settings.py  
+Google OAuth - https://pjs21s.github.io/googleoauth/  
+Profile Model, User Model extends - https://pjs21s.github.io/User-Extend/  
+haystack, whoosh search function - https://pjs21s.github.io/haystack/  
+Comment function - https://pjs21s.github.io/comment/  
+CKEditor - https://pjs21s.github.io/Ckeditor/  
 
 # ETC
 
