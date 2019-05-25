@@ -25,11 +25,11 @@ MDBootstrap, Bootstrap4, django, python, html, css, javascript, sqlite
 
 # 이슈 정리
 
-XSS Protection - settings.py에 `SECURE_BROWSER_XSS_FILTER = True`추가
-Google OAuth 적용 - https://pjs21s.github.io/googleoauth/
-Profile 모델, User 모델 확장 - https://pjs21s.github.io/User-Extend/
-haystack, whoosh 검색 기능 - https://pjs21s.github.io/haystack/
-댓글 구현 - https://pjs21s.github.io/comment/
+XSS Protection - settings.py에 `SECURE_BROWSER_XSS_FILTER = True`추가  
+Google OAuth 적용 - https://pjs21s.github.io/googleoauth/  
+Profile 모델, User 모델 확장 - https://pjs21s.github.io/User-Extend/  
+haystack, whoosh 검색 기능 - https://pjs21s.github.io/haystack/  
+댓글 구현 - https://pjs21s.github.io/comment/  
 CKEditor - https://pjs21s.github.io/Ckeditor/
 
 # ETC
