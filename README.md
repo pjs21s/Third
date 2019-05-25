@@ -23,6 +23,10 @@ MDBootstrap, Bootstrap4, django, python, html, css, javascript, sqlite
 
 (향후 추가)
 
+# 이슈 정리
+
+XSS Protection - settings.py에 `SECURE_BROWSER_XSS_FILTER = True`추가
+
 # ETC
 
 제작하면서 얻은 지식이나 관련 정보는 <https://pjs21s.github.io/>에 적어두었습니다.
