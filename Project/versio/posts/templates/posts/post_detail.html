@@ -3,7 +3,7 @@
 {% load tagging_tags %}
 {% block post_content %}
 <div class="container">  <!--타이틀 -->
-    <h1 class="font-weight-bold text-center">{{post.title|safe}}</h1>
+    <h2 class="font-weight-bold text-center">{{post.title|safe}}</h2>
         <a class="blockquote-footer text-center" href="{% url 'accounts:profile' pk=post.user.pk %}"> {{post.user.username}} {{post.user.profile.lang}}</a>
     <div class="media-footer d-flex flex-row-reverse">
         <i class="far fa-eye"> {{ hitcount.total_hits }}</i> <!-- 조회수 아이콘 -->
@@ -46,13 +46,16 @@
             </script>
             <button class="btn btn-light">{% post_to_facebook post.get_absolute_url "페이스북" %}</button>
             <button class="btn btn-light">{% post_to_twitter post.title post.get_absolute_url "트위터" %}</button>
-            
-        <h5 class="font-weight-bold">태그</h5>
-            {% tags_for_object object as tags %}
-            {% for tag in tags %}
-            <a href="{% url 'posts:tagged_object_list' tag.name %}">#{{ tag.name }}</a>
-            {% endfor %}
+        
     </div>
+</div>
+<div>
+    <h5>태그
+        {% tags_for_object object as tags %}
+        {% for tag in tags %}
+        <a href="{% url 'posts:tagged_object_list' tag.name %}">#{{ tag.name }}</a>
+        {% endfor %}
+    </h5>
 </div>
 
 <div class="container">
