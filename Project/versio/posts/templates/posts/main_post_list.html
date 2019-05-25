@@ -1,5 +1,6 @@
 {% extends "posts/post_base.html" %}
 {% block post_content %}
+<h2 class="font-weight-bold">조회수 인기순 <a href="{% url 'posts:all' %}"><i class="fas fa-ellipsis-h"></i></a></h2>
 <div class="card-columns">
 <!-- 메인 페이지 카드 형태 게시물 표시 -->
     {% for post in post_list %}

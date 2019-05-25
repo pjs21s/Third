@@ -3,7 +3,7 @@
 {% load socialaccount %}
 {% block body_block %}
 <div class="container">
-  <h1>로그인</h1>
+  <h2 class="font-weight-bold">로그인</h2>
   <form method="POST" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}

@@ -19,7 +19,6 @@ from .models import Post, Comment, Category
 from tagging.models import Tag, TaggedItem
 from tagging.views import TaggedObjectList
 
-
 class PostList(ListView):
     model = Post
     paginate_by = 10

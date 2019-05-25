@@ -191,3 +191,4 @@ CKEDITOR_CONFIGS = {
         'linkShowAdvancedTab': False,
         },
 }
+SECURE_BROWSER_XSS_FILTER = True
