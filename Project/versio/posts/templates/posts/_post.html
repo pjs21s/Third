@@ -1,7 +1,7 @@
 <a style="color: inherit;" class="card-link" href="{% url 'posts:single' username=post.user.username pk=post.pk %}">
     <div class="box card bg-white rounded">
         <div class="card-body">
-            {{post.user.username}}
+            {{post.user.username}} <p class="badge badge-primary text-wrap">{{post.category.category_name}}</p>
             <p class="font-weight-light">{{post.created_at}}</p>
             <p class="font-weight-bold">{{post.title}} ({{post.comments.count}})</p>
             <i class="like fas fa-heart"></i> {{post.like_count}}개
