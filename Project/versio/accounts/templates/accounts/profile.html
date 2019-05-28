@@ -1,28 +1,32 @@
 {% extends "base.html"%}
 {% load hitcount_tags %}
 {% block body_block %}
-  <h1 class="font-weight-bold">{{user.username}} 프로필</h1> <!--포스트한 횟수 + 로그인한 횟수-->
-  <h5>활동점수 <i class="fas fa-bolt"></i> {{user.posts.count|add:user.profile.logined_count}}</h5>
-  <h5>주 언어 <i class="fas fa-language"></i> {{user.profile.lang}}</h5>
-  <p>{{user.profile.bio}}</p>
-  <div class="row">
-    <div class="col-3">
-      <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link" href="{% url 'posts:for_user' username=user.username %}"><p>작성한 글</p></a>
+{% if user.username == "user" %}
+<div class="alert alert-primary" role="alert">
+  기본 아이디가 아닌 사용하실 아이디로 바꿔주세요!
+</div>
+{% endif %}
+<h1 class="font-weight-bold">{{user.username}} 프로필</h1> <!--포스트한 횟수 + 로그인한 횟수-->
+<h5>활동점수 <i class="fas fa-bolt"></i> {{user.posts.count|add:user.profile.logined_count}}</h5>
+<h5>주 언어 <i class="fas fa-language"></i> {{user.profile.lang}}</h5>
+<p>{{user.profile.bio}}</p>
+<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link" href="{% url 'posts:for_user' username=user.username %}"><p>작성한 글</p></a>
       
-      {% if user.is_authenticated and user == request.user and not hide_modify %}
-      <li class="nav-item dropdown" title="modify">
-        <a class="nav-link dropdown-toggle" id="settings-tab" data-toggle="dropdown" href="#settings" role="button"
-            aria-controls="settings" aria-selected="false" aria-haspopup="true" aria-expanded="false">회원정보</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{% url 'accounts:update_profile' %}">프로필 수정</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'accounts:remove' pk=user.pk %}">탈퇴</a>
-        </div>
-      </li>
-      {% endif %}
+    {% if user.is_authenticated and user == request.user and not hide_modify %}
+    <li class="nav-item dropdown" title="modify">
+      <a class="nav-link dropdown-toggle" id="settings-tab" data-toggle="dropdown" href="#settings" role="button"
+           aria-controls="settings" aria-selected="false" aria-haspopup="true" aria-expanded="false">회원정보</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'accounts:update_profile' %}">프로필 수정</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{% url 'accounts:remove' pk=user.pk %}">탈퇴</a>
       </div>
+    </li>
+    {% endif %}
     </div>
-
   </div>
+</div>
 {% endblock %}
