@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ['localhost','pjs21s.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'sslserver',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -191,4 +192,8 @@ CKEDITOR_CONFIGS = {
         'linkShowAdvancedTab': False,
         },
 }
+
 SECURE_BROWSER_XSS_FILTER = True
+SESSION_COOKIE_SECURE = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = True
