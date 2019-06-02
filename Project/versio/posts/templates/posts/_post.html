@@ -2,9 +2,10 @@
     <div class="box card bg-white rounded">
         <div class="card-body">
             {{post.user.username}} <p class="badge badge-primary text-wrap">{{post.category.category_name}}</p>
-            <p class="font-weight-light">{{post.created_at}}</p>
-            <p class="font-weight-bold">{{post.title}} ({{post.comments.count}})</p>
-            <i class="like fas fa-heart"></i> {{post.like_count}}개
+            <p><small>{{post.created_at}}</small></p>
+            <p class="font-weight-bold" style="display:inline">{{post.title}} </p>
+            <p class="text-primary" style="display:inline"><i class="far fa-comments"></i> {{post.comments.count}}</p>
+            <p class="text-danger" style="display:inline"><i class="like fas fa-heart"></i> {{post.like_count}}</p>
         </div>
     </div>
 </a>
