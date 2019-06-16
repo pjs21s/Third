@@ -21,7 +21,7 @@ MDBootstrap, Bootstrap4, django, python, html, css, javascript, sqlite
 
 # 아쉬운 점, 추가했으면 하는 기능
 
-(향후 추가)
+설계를 더 구체적으로 했어야 했다. 쪽지, 알림, 글쓴이 독려를 위한 정교한 Gamification, 모든 언어 자동 
 
 # 이슈 정리
 
