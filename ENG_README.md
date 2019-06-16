@@ -18,7 +18,7 @@ You can check more libraries what i used in `requirements.txt`
 
 # Add functions what i hoped
 
-(Will write more)
+I needed to plan more exactly. Message, Alarm, Better Gamification for writer, Auto translation on all languages 
 
 # Issues
 
