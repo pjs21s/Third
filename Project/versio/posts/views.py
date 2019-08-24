@@ -14,38 +14,44 @@ try:
 except ImportError:
     import json
 from hitcount.views import HitCountDetailView
-from .forms import CommentForm
-from .models import Post, Comment, Category
 from tagging.models import Tag, TaggedItem
 from tagging.views import TaggedObjectList
+from .forms import CommentForm
+from .models import Post, Comment, Category
+
 
 class PostList(ListView):
     model = Post
     paginate_by = 10
     queryset = Post.objects.all()
-    
+
+
 class MainPostList(ListView):
     model = Post
-    template_name ="posts/main_post_list.html"
-    queryset = Post.objects.exclude(category_id=4).order_by("-hit_count_generic__hits") #번역요청은 제외하고 출력, 조회수 순으로
+    template_name = "posts/main_post_list.html"
+    queryset = Post.objects.exclude(category_id=4).order_by("-hit_count_generic__hits")  # 번역요청은 제외하고 출력, 조회수 순으로
+
 
 class TransPostList(ListView):
     model = Post
     template_name = "posts/post_list.html"
-    queryset = Post.objects.filter(category_id=1) #번역
+    queryset = Post.objects.filter(category_id=1)  # 번역
+
 
 class FreePostList(ListView):
     model = Post
     template_name = "posts/post_list.html"
-    queryset = Post.objects.filter(category_id=2) #자유
-    
+    queryset = Post.objects.filter(category_id=2)  # 자유
+
+
 class AskTransList(ListView):
     model = Post
     template_name = "posts/post_list.html"
-    queryset = Post.objects.filter(category_id=4) #번역요청
+    queryset = Post.objects.filter(category_id=4)  # 번역요청
+
 
 class CreatePost(LoginRequiredMixin, CreateView):
-    fields = ('title','link', 'text', 'tag', 'category')
+    fields = ('title', 'link', 'text', 'tag', 'category')
     model = Post
 
     def form_valid(self, form):
@@ -53,6 +59,7 @@ class CreatePost(LoginRequiredMixin, CreateView):
         self.object.user = self.request.user
         self.object.save()
         return super().form_valid(form)
+
 
 class DeletePost(LoginRequiredMixin, DeleteView):
     model = Post
@@ -65,7 +72,8 @@ class DeletePost(LoginRequiredMixin, DeleteView):
     def delete(self, *args, **kwargs):
         messages.success(self.request, "Post Deleted")
         return super().delete(*args, **kwargs)
-    
+
+
 class UserPosts(ListView):
     model = Post
     template_name = "posts/user_post_list.html"
@@ -80,6 +88,7 @@ class UserPosts(ListView):
         else:
             return self.post_user.posts.all()
 
+
 class PostDetail(HitCountDetailView):
     model = Post
     count_hit = True
@@ -90,14 +99,17 @@ class PostDetail(HitCountDetailView):
             user__username__iexact=self.kwargs.get("username")
         )
 
+
 class UpdatePost(UpdateView):
     model = Post
-    fields =['title','text','tag','link','category']
+    fields = ['title', 'text', 'tag', 'link', 'category']
     success_url = reverse_lazy('posts:all')
+
 
 class PostTOL(TaggedObjectList):
     model = Post
     template_name = 'posts/tagging_post_list.html'
+
 
 @login_required
 def comment_write(request, pk):
@@ -112,7 +124,8 @@ def comment_write(request, pk):
             return redirect('posts:all')
     else:
         form = CommentForm()
-    return render(request, 'posts/comment_form.html', {'form':form})
+    return render(request, 'posts/comment_form.html', {'form': form})
+
 
 @login_required
 def comment_remove(request, pk):
@@ -120,6 +133,7 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('posts:all')
+
 
 @login_required
 @require_POST
@@ -135,4 +149,3 @@ def post_like(request):
 
     context = {'like_count': post.like_count}
     return HttpResponse(json.dumps(context), content_type="application/json")
-   

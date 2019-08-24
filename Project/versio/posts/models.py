@@ -1,18 +1,19 @@
-from django.db import models
-from django.urls import reverse
-from django.contrib.auth import get_user_model
-User = get_user_model()
 from ckeditor_uploader.fields import RichTextUploadingField
 from hitcount.models import HitCountMixin, HitCount
 from django.conf import settings
 from tagging.fields import TagField
 from django.contrib.contenttypes.fields import GenericRelation
-from django.db.models import Count
+from django.db import models
+from django.urls import reverse
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 class Category(models.Model):
     category_name = models.CharField(max_length=30)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
+    
     class Meta:
         unique_together = ["category_name"]
     
@@ -27,13 +28,14 @@ class Post(models.Model, HitCountMixin):
     link = models.URLField(blank=True)
     tag = TagField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                        blank=True,
-                                        related_name='like_user_set',
-                                        through='Like')
+    like_user_set = models.ManyToManyField(
+                        settings.AUTH_USER_MODEL,
+                        blank=True,
+                        related_name='like_user_set',
+                        through='Like')
     hit_count_generic = GenericRelation(
-    HitCount, object_id_field='object_pk',
-    related_query_name='hit_count_generic_relation')
+                        HitCount, object_id_field='object_pk',
+                        related_query_name='hit_count_generic_relation')
 
 
     def __str__(self):

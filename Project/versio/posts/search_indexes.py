@@ -2,6 +2,7 @@ import datetime
 from haystack import indexes
 from .models import Post
 
+
 class NoteIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True, template_name='search/post_text.txt')
     author = indexes.CharField(model_attr='user')
