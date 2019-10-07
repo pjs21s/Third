@@ -23,11 +23,11 @@ I needed to plan more exactly. Message, Alarm, Better Gamification for writer, A
 # Issues
 
 XSS Protection - Add `SECURE_BROWSER_XSS_FILTER = True` in settings.py  
-Google OAuth - https://pjs21s.github.io/googleoauth/  
-Profile Model, User Model extends - https://pjs21s.github.io/User-Extend/  
-haystack, whoosh search function - https://pjs21s.github.io/haystack/  
-Comment function - https://pjs21s.github.io/comment/  
-CKEditor - https://pjs21s.github.io/Ckeditor/  
+[Google OAuth](https://pjs21s.github.io/googleoauth/)  
+[Profile Model, User Model extends](https://pjs21s.github.io/User-Extend/)  
+[haystack, whoosh search function](https://pjs21s.github.io/haystack/)  
+[Comment function](https://pjs21s.github.io/comment/)  
+[CKEditor](https://pjs21s.github.io/Ckeditor/)  
 
 # ETC
 
