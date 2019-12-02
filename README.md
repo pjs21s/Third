@@ -8,7 +8,7 @@
 
 # 데모
 
-<https://pjs21s.pythonanywhere.com/>
+만료되었습니다.
 
 # 사용한 기술
 
