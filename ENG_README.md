@@ -9,7 +9,7 @@ That's why i made this website. I studied basic python and django in 2019.03. st
 
 # Demo
 
-<https://pjs21s.pythonanywhere.com/>
+Deleted
 
 # Tech used
 
